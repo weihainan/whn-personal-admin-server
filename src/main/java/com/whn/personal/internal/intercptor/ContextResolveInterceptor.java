@@ -1,12 +1,21 @@
 package com.whn.personal.internal.intercptor;
 
-import com.whn.waf.common.context.Context;
+import com.whn.personal.internal.constant.GustApi;
+import com.whn.personal.internal.support.AppContext;
+import com.whn.personal.modules.admin.domain.Admin;
+import com.whn.personal.modules.admin.service.AdminService;
+import com.whn.waf.common.exception.WafBizException;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static com.whn.personal.internal.constant.ErrorCode.MISSING_USER_INFO;
+import static com.whn.personal.internal.constant.ErrorCode.TOKEN_EXPIRED;
 
 /**
  * @author weihainan.
@@ -16,19 +25,33 @@ public class ContextResolveInterceptor extends HandlerInterceptorAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(ContextResolveInterceptor.class);
 
-    private Context context = Context.getBean(Context.class);
+    private AppContext context = AppContext.getBean(AppContext.class);
+
+    private AdminService adminService = AppContext.getBean(AdminService.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        String token = request.getHeader("token");
+        // 接口不需要验证用户信息
+        if (((HandlerMethod) handler).getBeanType().getAnnotation(GustApi.class) != null
+                || ((HandlerMethod) handler).getMethodAnnotation(GustApi.class) != null) {
+            return super.preHandle(request, response, handler);
+        }
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication == null || "anonymousUser".equals(authentication.getPrincipal())) {
-//            return true;
-//        }
-//        UserInfo userInfo = (UserInfo) authentication.getPrincipal();
-//        context.setUserInfo(userInfo);
+        String token = request.getHeader("Auth-Token");
+        if (StringUtils.isBlank(token) || !token.contains("-")) {
+            // 没有用户信息
+            throw WafBizException.of(MISSING_USER_INFO);
+        }
+
+        String[] tokens = token.split("\\-", 2);
+        Admin admin = adminService.getById(tokens[0]);
+        if (admin == null || !admin.getToken().equals(tokens[1])) {
+            // token不一致
+            throw WafBizException.of(TOKEN_EXPIRED);
+        }
+
+        context.setUserInfo(admin);
         return super.preHandle(request, response, handler);
     }
 }

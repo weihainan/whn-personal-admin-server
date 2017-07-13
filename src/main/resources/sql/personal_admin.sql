@@ -38,6 +38,6 @@ CREATE TABLE IF NOT EXISTS `admin` (
 `last_login_time`  timestamp NULL,
 `token`  varchar(64) NULL ,
 `expire_time` bigint NULL ,
-`avatar`  varchar(255) NULL
+`avatar`  varchar(255) NULL ,
 PRIMARY KEY (`id`)
 )

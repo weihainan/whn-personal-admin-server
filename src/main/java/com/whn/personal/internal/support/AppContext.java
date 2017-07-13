@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
  * @since 0.1 created on 2017/7/13.
  */
 @Component
-public class Context implements ApplicationContextAware {
+public class AppContext implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 
-    private Context() {
+    private AppContext() {
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Context implements ApplicationContextAware {
     }
 
     private static void initContextHolder(ApplicationContext context) {
-        Context.applicationContext = context;
+        AppContext.applicationContext = context;
     }
 
     public static Object getBean(String name) {

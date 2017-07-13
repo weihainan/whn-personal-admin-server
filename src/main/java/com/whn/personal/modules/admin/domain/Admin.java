@@ -1,5 +1,9 @@
 package com.whn.personal.modules.admin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 
 /**
@@ -8,15 +12,23 @@ import java.util.Date;
  */
 public class Admin {
 
+    @Length(min = 6, max = 6, message = "管理员编号为6位.")
     private String id;
+    @NotBlank(message = "管理员名称不能为空.")
+    @Length(min = 6, max = 20, message = "管理员名称为6~20位.")
     private String name;
+    @NotBlank(message = "管理员密码不能为空.")
+    @Length(min = 6, max = 20, message = "管理员密码为6~20位.")
+    @JsonIgnore
     private String password;
     private Date createTime;
     private Date lastLoginTime;
     private String avatar;
 
     private String token;     // 每次登陆都设置新的token
-    private long expireTime;  // token过期时间 每次登陆时当前时间 + 7天   后台定时任务 每天凌晨检查是否过期 设置新值 当2个值不一样的时候 重新登陆
+    // token过期时间 每次登陆时当前时间 + 7天   后台定时任务 每天凌晨检查是否过期 设置新值 当2个值不一样的时候 重新登陆
+    // 请求头包含 Auth-Token:userId-Token 验证token
+    private long expireTime;
 
     public String getId() {
         return id;
@@ -72,5 +84,13 @@ public class Admin {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public long getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(long expireTime) {
+        this.expireTime = expireTime;
     }
 }

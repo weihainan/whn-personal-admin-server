@@ -1,6 +1,7 @@
 package com.whn.personal.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.whn.personal.internal.intercptor.ContextResolveInterceptor;
 import com.whn.waf.common.config.AbstractWebMvcConfigurerAdpter;
 import com.whn.waf.common.support.WafJsonMapper;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +30,7 @@ public class WebMvcConfigurerAdpter extends AbstractWebMvcConfigurerAdpter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         super.addInterceptors(registry);
+        registry.addInterceptor(new ContextResolveInterceptor());
     }
 
 }

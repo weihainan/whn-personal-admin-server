@@ -8,10 +8,11 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
         <result column="token" property="token" jdbcType="VARCHAR"/>
+        <result column="expire_time" property="expireTime" jdbcType="BIGINT"/>
         <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, name, password, create_time, last_login_time, token, avatar
+        id, name, password, create_time, last_login_time, token, expire_time, avatar
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
@@ -25,11 +26,10 @@
     </delete>
     <insert id="insert" parameterType="com.whn.personal.modules.admin.domain.Admin">
         insert into admin (id, name, password,
-        create_time, last_login_time, token,
-        avatar)
+        create_time, last_login_time, token,expire_time, avatar)
         values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
         #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{token,jdbcType=VARCHAR},
-        #{avatar,jdbcType=VARCHAR})
+        #{expireTime,jdbcType=BIGINT},#{avatar,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.whn.personal.modules.admin.domain.Admin">
         insert into admin
@@ -51,6 +51,9 @@
             </if>
             <if test="token != null">
                 token,
+            </if>
+            <if test="expireTime != null">
+                expireTime,
             </if>
             <if test="avatar != null">
                 avatar,
@@ -75,6 +78,9 @@
             <if test="token != null">
                 #{token,jdbcType=VARCHAR},
             </if>
+            <if test="expireTime != null">
+                #{expireTime,jdbcType=VARCHAR},
+            </if>
             <if test="avatar != null">
                 #{avatar,jdbcType=VARCHAR},
             </if>
@@ -98,6 +104,9 @@
             <if test="token != null">
                 token = #{token,jdbcType=VARCHAR},
             </if>
+            <if test="expireTime != null">
+                expire_time = #{expireTime,jdbcType=VARCHAR},
+            </if>
             <if test="avatar != null">
                 avatar = #{avatar,jdbcType=VARCHAR},
             </if>
@@ -111,6 +120,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
         last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
         token = #{token,jdbcType=VARCHAR},
+        expire_time = #{expireTime,jdbcType=VARCHAR},
         avatar = #{avatar,jdbcType=VARCHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
