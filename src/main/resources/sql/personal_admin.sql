@@ -30,3 +30,13 @@ CREATE TABLE IF NOT EXISTS `charge_label` (
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `admin` (
+`id`  varchar(64) NOT NULL ,
+`name`  varchar(64) NOT NULL ,
+`password`  varchar(64) NOT NULL ,
+`create_time`  timestamp NOT NULL,
+`last_login_time`  timestamp NULL,
+`token`  varchar(64) NULL ,
+`avatar`  varchar(255) NULL
+PRIMARY KEY (`id`)
+)
