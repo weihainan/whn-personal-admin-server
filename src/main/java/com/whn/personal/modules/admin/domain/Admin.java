@@ -13,8 +13,10 @@ public class Admin {
     private String password;
     private Date createTime;
     private Date lastLoginTime;
-    private String token;
     private String avatar;
+
+    private String token;     // 每次登陆都设置新的token
+    private long expireTime;  // token过期时间 每次登陆时当前时间 + 7天   后台定时任务 每天凌晨检查是否过期 设置新值 当2个值不一样的时候 重新登陆
 
     public String getId() {
         return id;

@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 `create_time`  timestamp NOT NULL,
 `last_login_time`  timestamp NULL,
 `token`  varchar(64) NULL ,
+`expire_time` bigint NULL ,
 `avatar`  varchar(255) NULL
 PRIMARY KEY (`id`)
 )
