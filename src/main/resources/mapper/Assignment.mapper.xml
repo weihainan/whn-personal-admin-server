@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whn.personal.modules.assignment.mapper.AssignmentMapper">
+
+    <resultMap id="BaseResultMap" type="com.whn.personal.modules.assignment.domain.Assignment">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="stare" property="stare" jdbcType="TINYINT"/>
+        <result column="completed" property="completed" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, content, stare, completed, create_time, user_id
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from assignment
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from assignment
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.whn.personal.modules.assignment.domain.Assignment">
+        insert into assignment (id, content, stare,
+        completed, create_time, user_id
+        )
+        values (#{id,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{stare,jdbcType=TINYINT},
+        #{completed,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.whn.personal.modules.assignment.domain.Assignment">
+        insert into assignment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="stare != null">
+                stare,
+            </if>
+            <if test="completed != null">
+                completed,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="stare != null">
+                #{stare,jdbcType=TINYINT},
+            </if>
+            <if test="completed != null">
+                #{completed,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.whn.personal.modules.assignment.domain.Assignment">
+        update assignment
+        <set>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="stare != null">
+                stare = #{stare,jdbcType=TINYINT},
+            </if>
+            <if test="completed != null">
+                completed = #{completed,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.whn.personal.modules.assignment.domain.Assignment">
+        update assignment
+        set content = #{content,jdbcType=VARCHAR},
+        stare = #{stare,jdbcType=TINYINT},
+        completed = #{completed,jdbcType=TINYINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        user_id = #{userId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

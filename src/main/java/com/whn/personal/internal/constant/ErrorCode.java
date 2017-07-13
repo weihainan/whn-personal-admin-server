@@ -1,0 +1,63 @@
+package com.whn.personal.internal.constant;
+
+import com.whn.waf.common.base.constant.IErrorCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.HttpStatus;
+
+/**
+ * Created by Administrator on 2017/7/13.
+ */
+public enum ErrorCode implements IErrorCode {
+
+    // 整个系统
+    DATA_NOT_EXIST(HttpStatus.NOT_FOUND, "DATA_NOT_EXIST", "数据不存在，可能已被删除"),
+    DATA_CONFLICT(HttpStatus.CONFLICT, "DATA_CONFLICT", "数据已存在"),
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", "服务器内部错误"),
+    ;
+
+    private static final Logger logger = LoggerFactory.getLogger(ErrorCode.class);
+
+    private static ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+
+    static {
+        messageSource.setBasename("messages/message");
+    }
+
+
+    private HttpStatus httpStatus;
+    private String code;
+    private String message;
+    private static final String PREFIX = "DESIGN_METHOD/";
+
+    ErrorCode(HttpStatus httpStatus, String code, String message) {
+        setHttpStatus(httpStatus);
+        setCode(code);
+        setMessage(message);
+    }
+
+    public HttpStatus getHttpStatus() {
+        return this.httpStatus;
+    }
+
+    public void setHttpStatus(HttpStatus httpStatus) {
+        this.httpStatus = httpStatus;
+    }
+
+    public String getCode() {
+        return PREFIX + this.code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}
