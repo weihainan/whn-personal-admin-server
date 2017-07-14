@@ -16,8 +16,10 @@ public enum ErrorCode implements IErrorCode {
     DATA_CONFLICT(HttpStatus.CONFLICT, "DATA_CONFLICT", "数据已存在"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", "服务器内部错误"),
 
-    MISSING_USER_INFO(HttpStatus.BAD_REQUEST, "MISSING_USER_INFO", "缺失用户信息."),
-    TOKEN_EXPIRED(HttpStatus.BAD_REQUEST, "TOKEN_EXPIRED", "用户认证过期,请重新登陆."),
+    MISSING_USER_INFO(HttpStatus.UNAUTHORIZED, "MISSING_USER_INFO", "缺失用户信息."),
+    TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "TOKEN_EXPIRED", "用户认证过期,请重新登陆."),
+
+    LOGIN_ERROR(HttpStatus.BAD_REQUEST, "LOGIN_ERROR", "用户名或密码错误."),
     ;
 
     private static final Logger logger = LoggerFactory.getLogger(ErrorCode.class);

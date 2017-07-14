@@ -14,6 +14,13 @@
     <sql id="Base_Column_List">
         id, name, password, create_time, last_login_time, token, expire_time, avatar
     </sql>
+    <select id="selectExpired" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        <![CDATA[select
+        <include refid="Base_Column_List"/>
+        from admin
+        where expire_time <= #{system_time}
+        ]]>
+    </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>

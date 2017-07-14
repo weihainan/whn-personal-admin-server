@@ -1,8 +1,6 @@
 package com.whn.personal.modules.admin.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
 
@@ -14,12 +12,11 @@ public class Admin {
 
     @Length(min = 6, max = 6, message = "管理员编号为6位.")
     private String id;
-    @NotBlank(message = "管理员名称不能为空.")
-    @Length(min = 6, max = 20, message = "管理员名称为6~20位.")
+
+    @Length(min = 3, max = 20, message = "管理员名称为6~20位.")
     private String name;
-    @NotBlank(message = "管理员密码不能为空.")
+
     @Length(min = 6, max = 20, message = "管理员密码为6~20位.")
-    @JsonIgnore
     private String password;
     private Date createTime;
     private Date lastLoginTime;

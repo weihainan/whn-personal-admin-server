@@ -6,8 +6,10 @@ import com.whn.personal.modules.admin.domain.Admin;
 import com.whn.personal.modules.admin.service.AdminService;
 import com.whn.waf.common.exception.WafBizException;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -32,9 +34,12 @@ public class ContextResolveInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        if (RequestMethod.OPTIONS.name().equals(request.getMethod())) {
+            return super.preHandle(request, response, handler);
+        }
+
         // 接口不需要验证用户信息
-        if (((HandlerMethod) handler).getBeanType().getAnnotation(GustApi.class) != null
-                || ((HandlerMethod) handler).getMethodAnnotation(GustApi.class) != null) {
+        if (((HandlerMethod) handler).getBeanType().getAnnotation(GustApi.class) != null || ((HandlerMethod) handler).getMethodAnnotation(GustApi.class) != null) {
             return super.preHandle(request, response, handler);
         }
 
@@ -46,8 +51,8 @@ public class ContextResolveInterceptor extends HandlerInterceptorAdapter {
 
         String[] tokens = token.split("\\-", 2);
         Admin admin = adminService.getById(tokens[0]);
-        if (admin == null || !admin.getToken().equals(tokens[1])) {
-            // token不一致
+        if (admin == null || !admin.getToken().equals(tokens[1]) || DateTime.now().getMillis() > admin.getExpireTime()) {
+            // token过期
             throw WafBizException.of(TOKEN_EXPIRED);
         }
 
