@@ -28,7 +28,7 @@ public class ChargeLabelController {
 
     @RequestMapping(method = RequestMethod.GET)
     public Object delete(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
-                         @RequestParam(value = "page", required = false, defaultValue = "10") int size) {
+                         @RequestParam(value = "size", required = false, defaultValue = "10") int size) {
         return chargeLabelService.selectAll(page + 1, size);
     }
 }
