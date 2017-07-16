@@ -1,6 +1,7 @@
 package com.whn.personal.modules.charge.mapper;
 
 
+import com.github.pagehelper.Page;
 import com.whn.personal.modules.charge.domain.ChargeLabel;
 
 public interface ChargeLabelMapper {
@@ -16,4 +17,7 @@ public interface ChargeLabelMapper {
     int updateByPrimaryKeySelective(ChargeLabel record);
 
     int updateByPrimaryKey(ChargeLabel record);
+
+    Page<ChargeLabel> selectAll();
+
 }
