@@ -39,6 +39,7 @@ public class ChargeLabelService {
         if (oldOne == null) {
             throw WafBizException.of(ErrorCode.DATA_NOT_EXIST);
         }
+        chargeLabelMapper.deleteByPrimaryKey(id);
         return oldOne;
     }
 

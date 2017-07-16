@@ -43,7 +43,7 @@ public class ContextResolveInterceptor extends HandlerInterceptorAdapter {
             return super.preHandle(request, response, handler);
         }
 
-        String token = request.getHeader("Auth-Token");
+        String token = request.getHeader("Authorization");
         if (StringUtils.isBlank(token) || !token.contains("-")) {
             // 没有用户信息
             throw WafBizException.of(MISSING_USER_INFO);

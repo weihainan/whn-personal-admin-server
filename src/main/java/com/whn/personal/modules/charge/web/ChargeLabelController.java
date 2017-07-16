@@ -21,7 +21,7 @@ public class ChargeLabelController {
         return chargeLabelService.add(label);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     public Object delete(@PathVariable String id) {
         return chargeLabelService.delete(id);
     }
