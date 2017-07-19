@@ -2,6 +2,7 @@ package com.whn.personal.modules.charge.web;
 
 import com.whn.personal.modules.charge.domain.Charge;
 import com.whn.personal.modules.charge.service.ChargeService;
+import com.whn.personal.modules.charge.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,17 @@ public class ChargeController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public Object post(@PathVariable String id) {
+    public Object delete(@PathVariable String id) {
         return chargeService.delete(id);
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public Object list(@RequestBody SearchVo condition) {
+        return chargeService.search(condition);
+    }
+
+    @RequestMapping(value = "/year_month", method = RequestMethod.GET)
+    public Object getYearMaonth() {
+        return chargeService.getYearMonth();
     }
 }

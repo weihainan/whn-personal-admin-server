@@ -7,6 +7,7 @@ import com.whn.personal.modules.charge.domain.ChargeLabel;
 import com.whn.personal.modules.charge.mapper.ChargeLabelMapper;
 import com.whn.waf.common.exception.WafBizException;
 import com.whn.waf.common.support.PageableItems;
+import com.whn.waf.common.support.SimpleItems;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,9 +44,14 @@ public class ChargeLabelService {
         return oldOne;
     }
 
-    public Object selectAll(int page, int size) {
-        PageHelper.startPage(page, size);
-        Page<ChargeLabel> result = chargeLabelMapper.selectAll();
-        return PageableItems.of(result.getResult(), result.getTotal());
+    public Object selectAll(int page, int size, boolean all) {
+        if (!all) {
+            PageHelper.startPage(page, size);
+            Page<ChargeLabel> result = chargeLabelMapper.selectAll();
+            return PageableItems.of(result.getResult(), result.getTotal());
+        }else{
+            Page<ChargeLabel> result = chargeLabelMapper.selectAll();
+            return SimpleItems.of(result.getResult());
+        }
     }
 }

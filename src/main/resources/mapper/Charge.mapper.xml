@@ -19,6 +19,27 @@
         from charge
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from charge
+        <where>
+            <if test="yearAndMonth != null and yearAndMonth != ''">
+                left(create_time, 7) = #{yearAndMonth}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="selectYearMonth" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select DISTINCT left(create_time, 7)
+        from charge
+        where user_id = #{userId}
+        order by create_time desc
+    </select>
+
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from charge
         where id = #{id,jdbcType=VARCHAR}
