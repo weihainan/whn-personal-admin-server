@@ -32,7 +32,7 @@
         order by create_time desc
     </select>
 
-    <select id="selectYearMonth" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectYearMonth" resultType="java.util.List" parameterType="java.lang.String">
         select DISTINCT left(create_time, 7)
         from charge
         where user_id = #{userId}
