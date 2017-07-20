@@ -4,6 +4,7 @@ import com.whn.personal.modules.charge.domain.Charge;
 import com.whn.personal.modules.charge.service.ChargeService;
 import com.whn.personal.modules.charge.vo.SearchVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,6 +24,7 @@ public class ChargeController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(code = HttpStatus.OK)
     public Object delete(@PathVariable String id) {
         return chargeService.delete(id);
     }
