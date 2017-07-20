@@ -23,5 +23,17 @@ public interface ChargeMapper {
 
     Page<Charge> selectAll(Map<String, Object> params);
 
-    List<String> selectYearMonth(String userId);
+    /**
+     * userId 必填
+     * timePatten 4 代表获取年 2017   7获取年月 2017-01
+     * year 指定年份获取年月
+     * <p>
+     * {time:2017}
+     * {time:2017-01}
+     */
+    List<String> selectYearMonth(Map<String, Object> params);
+
+    Map<String, Object> statisticsTotal(Map<String, Object> params);
+
+    List<Map<String, Object>> statisticsDetails(Map<String, Object> params);
 }

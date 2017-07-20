@@ -1,6 +1,5 @@
 package com.whn.personal.modules.charge.web;
 
-import com.whn.personal.internal.constant.GustApi;
 import com.whn.personal.modules.charge.domain.Charge;
 import com.whn.personal.modules.charge.service.ChargeService;
 import com.whn.personal.modules.charge.vo.SearchVo;
@@ -33,9 +32,14 @@ public class ChargeController {
         return chargeService.search(condition);
     }
 
-    @GustApi
     @RequestMapping(value = "/year_month", method = RequestMethod.GET)
     public Object getYearMaonth() {
         return chargeService.getYearMonth();
     }
+
+    @RequestMapping(value = "/statistics", method = RequestMethod.GET)
+    public Object statistics() {
+        return chargeService.statistics();
+    }
+
 }

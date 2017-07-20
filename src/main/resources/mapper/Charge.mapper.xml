@@ -33,9 +33,16 @@
     </select>
 
     <select id="selectYearMonth" resultType="java.lang.String" parameterType="java.lang.String">
-        select DISTINCT left(create_time, 7)
+        select DISTINCT left(create_time, #{timePatten}) as time
         from charge
-        where user_id = #{userId}
+        <where>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId}
+            </if>
+            <if test="year != null and year != ''">
+                left(create_time, 4) = #{year}
+            </if>
+        </where>
         order by create_time desc
     </select>
 
@@ -135,5 +142,17 @@
         create_time = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+    <select id="statisticsTotal" parameterType="map" resultType="map">
+        SELECT SUM(amount) as total
+        FROM charge
+        WHERE user_id = #{userId} AND type=#{type} AND LEFT(create_time, #{timePatten}) = #{time}
+    </select>
+
+    <select id="statisticsDetails" parameterType="map" resultType="map">
+        SELECT SUM(amount) as total, label FROM charge
+        WHERE user_id = #{userId} AND type=#{type} AND LEFT(create_time, #{timePatten}) = #{time}
+        GROUP BY label
+    </select>
 
 </mapper>
