@@ -19,6 +19,17 @@
         from assignment
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from assignment
+        <where>
+            <if test="completed!=null and completed!=''">
+                completed = #{completed}
+            </if>
+        </where>
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from assignment
         where id = #{id,jdbcType=VARCHAR}

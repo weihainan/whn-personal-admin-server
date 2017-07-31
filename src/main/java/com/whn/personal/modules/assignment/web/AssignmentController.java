@@ -1,9 +1,11 @@
 package com.whn.personal.modules.assignment.web;
 
+import com.whn.personal.modules.assignment.domain.Assignment;
 import com.whn.personal.modules.assignment.service.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @author weihainan.
@@ -15,4 +17,26 @@ public class AssignmentController {
 
     @Autowired
     private AssignmentService assignmentService;
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public Object add(@RequestBody Assignment assignment) {
+        return assignmentService.add(assignment);
+    }
+
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public Object add(@PathVariable String id) {
+        return assignmentService.delete(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Object completed(@PathVariable String id) {
+        return assignmentService.completed(id);
+    }
+
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public Object list(Map<String, Object> params) {
+        return assignmentService.list(params);
+    }
 }

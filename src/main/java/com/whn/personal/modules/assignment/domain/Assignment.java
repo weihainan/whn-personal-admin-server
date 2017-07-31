@@ -1,5 +1,7 @@
 package com.whn.personal.modules.assignment.domain;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 
 /**
@@ -9,6 +11,7 @@ import java.util.Date;
 public class Assignment {
 
     private String id;
+    @NotBlank(message = "事务内容不能为空.")
     private String content;
     private boolean stare;
     private boolean completed;
