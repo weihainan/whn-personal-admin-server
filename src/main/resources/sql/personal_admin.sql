@@ -40,4 +40,13 @@ CREATE TABLE IF NOT EXISTS `admin` (
 `expire_time` bigint NULL ,
 `avatar`  varchar(255) NULL ,
 PRIMARY KEY (`id`)
-)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `apples` (
+  `id`  int NOT NULL AUTO_INCREMENT ,
+  `weight`  int NOT NULL DEFAULT 0 ,
+  `create_time`  timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP ,
+  `user_id`  varchar(32) NOT NULL ,
+  `is_eaten`  tinyint NOT NULL DEFAULT 0 ,
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

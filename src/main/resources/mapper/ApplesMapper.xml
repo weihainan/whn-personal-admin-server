@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whn.personal.modules.apple.mapper.ApplesMapper">
+
+    <resultMap id="BaseResultMap" type="com.whn.personal.modules.apple.domain.Apple">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="weight" property="weight" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="is_eaten" property="isEaten" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, weight, create_time, user_id, is_eaten
+    </sql>
+
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from apples
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from apples
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from apples
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.whn.personal.modules.apple.domain.Apple">
+        <!-- selectKey将主键返回，需要再返回 -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into apples (id, weight, create_time,
+        user_id, is_eaten)
+        values (#{id,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+        #{userId,jdbcType=VARCHAR}, #{isEaten,jdbcType=TINYINT})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.whn.personal.modules.apple.domain.Apple">
+        update apples
+        set weight = #{weight,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        user_id = #{userId,jdbcType=VARCHAR},
+        is_eaten = #{isEaten,jdbcType=TINYINT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

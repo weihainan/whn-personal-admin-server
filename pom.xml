@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jetty.context>/</jetty.context>
         <jetty.http.port>9088</jetty.http.port>
         <jetty.https.port>9443</jetty.https.port>
