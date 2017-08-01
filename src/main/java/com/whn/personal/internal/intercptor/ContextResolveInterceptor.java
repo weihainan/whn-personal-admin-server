@@ -51,7 +51,7 @@ public class ContextResolveInterceptor extends HandlerInterceptorAdapter {
 
         String[] tokens = token.split("\\-", 2);
         Admin admin = adminService.getById(tokens[0]);
-        if (admin == null || !admin.getToken().equals(tokens[1]) || DateTime.now().getMillis() > admin.getExpireTime()) {
+        if (admin == null || !admin.getToken().equals(tokens[1]) || DateTime.now().getMillis() >= admin.getExpireTime()) {
             // token过期
             throw WafBizException.of(TOKEN_EXPIRED);
         }

@@ -1,5 +1,6 @@
 package com.whn.personal.modules.admin.service;
 
+import com.google.common.collect.Maps;
 import com.whn.personal.internal.constant.ErrorCode;
 import com.whn.personal.modules.admin.domain.Admin;
 import com.whn.personal.modules.admin.mapper.AdminMapper;
@@ -16,6 +17,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static com.whn.personal.internal.constant.ErrorCode.LOGIN_ERROR;
 
@@ -63,6 +65,17 @@ public class AdminService {
 
     public Admin getById(String id) {
         return adminMapper.selectByPrimaryKey(id);
+    }
+
+    public Object valid(String token) {
+        Map<String, String> result = Maps.newHashMap();
+        result.put("state", "ok");
+        String[] tokens = token.split("\\-", 2);
+        Admin admin = this.getById(tokens[0]);
+        if (admin == null || !admin.getToken().equals(tokens[1]) || DateTime.now().getMillis() >= admin.getExpireTime()) {
+           result.put("state", "expired");
+        }
+        return result;
     }
 
     /**
