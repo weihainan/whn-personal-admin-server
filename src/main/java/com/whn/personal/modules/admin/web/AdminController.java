@@ -30,7 +30,7 @@ public class AdminController {
     }
 
     @GustApi
-    @RequestMapping(value = "/valid/{token}", method = RequestMethod.POST)
+    @RequestMapping(value = "/valid/{token}", method = RequestMethod.GET)
     public Object login(@PathVariable String token) {
         return adminService.valid(token);
     }
