@@ -1,6 +1,5 @@
 package com.whn.personal.modules.apple.web;
 
-import com.whn.personal.internal.constant.GustApi;
 import com.whn.personal.modules.apple.service.AppleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Administrator.
  * @since 0.1 created on 2017/7/29 0029.
  */
-@GustApi
 @RestController
 @RequestMapping(value = "/v0.1/apples")
 public class AppleController {
