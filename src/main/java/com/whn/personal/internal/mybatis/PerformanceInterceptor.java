@@ -52,7 +52,7 @@ public class PerformanceInterceptor implements Interceptor {
 
         long end = System.currentTimeMillis();
         long timing = end - start;
-        String outputStr = "Time-consuming:" + timing + " ms" + " - Id:" + statementId + " - Sql:" + sql;
+        String outputStr = "\r\nTime-consuming:" + timing + " ms" + "\r\nId:" + statementId + "\r\nSql:" + sql;
         log.info(outputStr);
         return result;
     }

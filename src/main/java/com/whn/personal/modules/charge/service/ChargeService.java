@@ -18,6 +18,7 @@ import com.whn.waf.common.utils.ObjectId;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
@@ -32,6 +33,7 @@ import java.util.Map;
  * @since 0.1 created on 2017/7/13.
  */
 @Service
+@Transactional
 public class ChargeService {
 
     @Autowired

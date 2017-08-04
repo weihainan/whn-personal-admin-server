@@ -12,6 +12,7 @@ import com.whn.waf.common.utils.ObjectId;
 import com.whn.waf.common.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Map;
@@ -22,6 +23,7 @@ import java.util.Map;
  */
 
 @Service
+@Transactional
 public class AssignmentService {
 
     @Autowired

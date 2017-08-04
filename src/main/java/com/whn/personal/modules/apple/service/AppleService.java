@@ -7,6 +7,7 @@ import com.whn.personal.modules.apple.mapper.ApplesMapper;
 import com.whn.waf.common.exception.WafBizException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Random;
  * @since 0.1 created on 2017/8/1.
  */
 @Service
+@Transactional
 public class AppleService {
 
     @Autowired

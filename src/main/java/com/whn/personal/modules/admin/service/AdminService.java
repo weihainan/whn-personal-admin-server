@@ -1,5 +1,7 @@
 package com.whn.personal.modules.admin.service;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Maps;
 import com.whn.personal.internal.constant.ErrorCode;
 import com.whn.personal.modules.admin.domain.Admin;
@@ -10,14 +12,20 @@ import com.whn.waf.common.utils.CommonUtil;
 import com.whn.waf.common.utils.Encrypt;
 import com.whn.waf.common.utils.ValidatorUtil;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import static com.whn.personal.internal.constant.ErrorCode.LOGIN_ERROR;
 
@@ -26,7 +34,10 @@ import static com.whn.personal.internal.constant.ErrorCode.LOGIN_ERROR;
  * @since 0.1 created on 2017/7/13.
  */
 @Service
+@Transactional
 public class AdminService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminService.class);
 
     @Autowired
     private AdminMapper adminMapper;
@@ -63,8 +74,21 @@ public class AdminService {
         return admin;
     }
 
-    public Admin getById(String id) {
-        return adminMapper.selectByPrimaryKey(id);
+    private Cache<String, Admin> adminsCache = CacheBuilder.newBuilder().
+            maximumSize(100).expireAfterWrite(3600, TimeUnit.SECONDS).build();
+
+    public Admin getById(final String id) {
+        try {
+            return adminsCache.get(id, new Callable<Admin>() {
+                @Override
+                public Admin call() throws Exception {
+                    return adminMapper.selectByPrimaryKey(id);
+                }
+            });
+        } catch (ExecutionException e) {
+            LOGGER.error("getCaseStandardLaborTime error", e);
+        }
+        return null;
     }
 
     public Object valid(String token) {
@@ -73,7 +97,7 @@ public class AdminService {
         String[] tokens = token.split("\\-", 2);
         Admin admin = this.getById(tokens[0]);
         if (admin == null || !admin.getToken().equals(tokens[1]) || DateTime.now().getMillis() >= admin.getExpireTime()) {
-           result.put("state", "expired");
+            result.put("state", "expired");
         }
         return result;
     }

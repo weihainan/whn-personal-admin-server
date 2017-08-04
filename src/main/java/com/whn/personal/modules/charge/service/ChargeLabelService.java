@@ -11,6 +11,7 @@ import com.whn.waf.common.support.SimpleItems;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -19,6 +20,7 @@ import java.util.Date;
  * @since 0.1 created on 2017/7/13.
  */
 @Service
+@Transactional
 public class ChargeLabelService {
     @Autowired
     private ChargeLabelMapper chargeLabelMapper;
