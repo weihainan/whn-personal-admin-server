@@ -29,9 +29,9 @@ public class ChargeLabelController {
 
     @GustApi
     @RequestMapping(method = RequestMethod.GET)
-    public Object delete(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+    public Object selectAll(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
                          @RequestParam(value = "size", required = false, defaultValue = "10") int size,
                          @RequestParam(value = "all", required = false, defaultValue = "false") boolean all) {
-        return chargeLabelService.selectAll(page + 1, size, all);
+        return chargeLabelService.selectAll(page, size, all);
     }
 }

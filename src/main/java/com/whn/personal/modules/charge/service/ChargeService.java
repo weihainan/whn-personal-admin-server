@@ -55,7 +55,7 @@ public class ChargeService {
     }
 
     public Object search(SearchVo condition) {
-        PageHelper.startPage((int) condition.getPage() + 1, (int) condition.getSize());
+        PageHelper.startPage((int) condition.getPage(), (int) condition.getSize());
         Map<String, Object> params = Maps.newHashMap();
         if (StringUtils.isNotBlank(condition.getYearAndMonth())) {
             params.put("yearAndMonth", condition.getYearAndMonth());
