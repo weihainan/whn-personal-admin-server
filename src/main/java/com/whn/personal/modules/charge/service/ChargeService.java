@@ -2,7 +2,6 @@ package com.whn.personal.modules.charge.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.whn.personal.internal.support.AppContext;
@@ -13,7 +12,6 @@ import com.whn.personal.modules.charge.mapper.ChargeMapper;
 import com.whn.personal.modules.charge.vo.SearchVo;
 import com.whn.waf.common.support.PageableItems;
 import com.whn.waf.common.support.ParamBuilder;
-import com.whn.waf.common.utils.CommonUtil;
 import com.whn.waf.common.utils.ObjectId;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,13 +61,7 @@ public class ChargeService {
             params.put("yearAndMonth", condition.getYearAndMonth());
         }
         Page<Charge> result = chargeMapper.selectAll(params);
-        return PageableItems.of(result.getResult(), result.getTotal(), new Function<Charge, Map<String, Object>>() {
-            public Map<String, Object> apply(Charge input) {
-                Map<String, Object> map = CommonUtil.toMap(input);
-                map.put("create_time", input.getCreateTime().getTime());
-                return map;
-            }
-        });
+        return PageableItems.of(result.getResult(), result.getTotal());
     }
 
     public Object getYearMonth() {
