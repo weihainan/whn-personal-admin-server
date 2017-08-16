@@ -38,7 +38,6 @@ public class WebController {
             zipOutputStream.setFallbackToUTF8(true);
             zipOutputStream.setUseLanguageEncodingFlag(true);
 
-            // 下面代码可以放在for里面 里边加入多个文件到压缩包里面
             ZipEntry zipEntry = new ZipEntry(1 + ".jpg");
             zipOutputStream.putNextEntry(zipEntry);
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
@@ -47,6 +46,14 @@ public class WebController {
             hints.put(EncodeHintType.MARGIN, 1);
             hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q);
             BitMatrix bitMatrix = multiFormatWriter.encode("二维码内容", BarcodeFormat.QR_CODE, size, size, hints);
+            MatrixToImageWriter.writeToStream(bitMatrix, "jpg", zipOutputStream);
+            zipOutputStream.flush();
+            zipOutputStream.closeEntry();
+
+            // 下面代码可以放在for里面 里边加入多个文件到压缩包里面
+            zipEntry = new ZipEntry(2 + ".jpg");
+            zipOutputStream.putNextEntry(zipEntry);
+            bitMatrix = multiFormatWriter.encode("二维码内容2", BarcodeFormat.QR_CODE, size, size, hints);
             MatrixToImageWriter.writeToStream(bitMatrix, "jpg", zipOutputStream);
             zipOutputStream.flush();
             zipOutputStream.closeEntry();
