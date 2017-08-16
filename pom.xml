@@ -51,6 +51,20 @@
             <version>4.1.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.9.4</version>
+        </dependency>
+
+        <!-- google二维码 -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
