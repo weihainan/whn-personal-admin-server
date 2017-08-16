@@ -28,6 +28,7 @@ public class WebController {
     @GustApi
     @RequestMapping(value = "/zip", method = RequestMethod.GET)
     public void zip(HttpServletResponse response) {
+        int size = 256;
         ZipOutputStream zipOutputStream = null;
         response.setContentType("application/octet-stream");
         response.addHeader("Content-Disposition", String.format("attachment;filename=test.zip", "UTF-8"));
@@ -40,11 +41,11 @@ public class WebController {
             zipOutputStream.putNextEntry(zipEntry);
 
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-            Map hints = new HashMap();
+            Map<EncodeHintType,Object> hints = new HashMap<>();
             hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             hints.put(EncodeHintType.MARGIN, 1);
             hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q);
-            BitMatrix bitMatrix = multiFormatWriter.encode("二维码内容", BarcodeFormat.QR_CODE, 256, 256, hints);
+            BitMatrix bitMatrix = multiFormatWriter.encode("二维码内容", BarcodeFormat.QR_CODE, size, size, hints);
             MatrixToImageWriter.writeToStream(bitMatrix, "jpg", zipOutputStream);
 
             zipOutputStream.flush();
