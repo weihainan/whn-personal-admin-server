@@ -71,6 +71,7 @@ public class AdminService {
         admin.setLastLoginTime(new Date());
         refreshToken(admin);
         adminMapper.updateByPrimaryKey(admin);
+        adminsCache.put(admin.getId(), admin);
         return admin;
     }
 
@@ -107,14 +108,19 @@ public class AdminService {
      */
     @Scheduled(cron = "0 0 0 * * ? ")
     public void refreshAdminToken() {
+        LOGGER.info(" start refresh admin token");
+        int count = 0;
         List<Admin> adminList = adminMapper.selectExpired(DateTime.now().getMillis());
         if (!CollectionUtils.isEmpty(adminList)) {
             for (int i = 0; i < adminList.size(); i++) {
                 Admin admin = adminList.get(i);
                 refreshToken(admin);
                 adminMapper.updateByPrimaryKey(admin);
+                adminsCache.invalidate(admin.getId());
+                count++;
             }
         }
+        LOGGER.info("refresh  token end: {}", count);
     }
 
 //    Cron表达式的格式：秒 分 时 日 月 周 年(可选)。
