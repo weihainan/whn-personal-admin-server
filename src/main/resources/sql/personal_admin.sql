@@ -45,7 +45,7 @@ PRIMARY KEY (`id`)
 CREATE TABLE IF NOT EXISTS `apples` (
   `id`  int NOT NULL AUTO_INCREMENT ,
   `weight`  int NOT NULL DEFAULT 0 ,
-  `create_time`  timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP ,
+  `create_time`  timestamp NOT NULL,
   `user_id`  varchar(32) NOT NULL ,
   `is_eaten`  tinyint NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`id`)
