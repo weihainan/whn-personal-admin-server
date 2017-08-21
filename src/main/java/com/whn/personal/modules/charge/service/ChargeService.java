@@ -41,11 +41,22 @@ public class ChargeService {
     private ChargeMapper chargeMapper;
 
     public Object add(Charge charge) {
-        charge.setUserId(context.getUserId());
-        charge.setId(ObjectId.id());
-        charge.setCreateTime(new Date());
-        chargeMapper.insert(charge);
-        return charge;
+
+        if (StringUtils.isBlank(charge.getId())) {
+            charge.setUserId(context.getUserId());
+            charge.setId(ObjectId.id());
+            charge.setCreateTime(new Date());
+            chargeMapper.insert(charge);
+            return charge;
+        } else {
+            Charge old = chargeMapper.selectByPrimaryKey(charge.getId());
+            old.setAmount(charge.getAmount());
+            old.setLabel(charge.getLabel());
+            old.setMark(charge.getMark());
+            old.setType(charge.getType());
+            chargeMapper.updateByPrimaryKey(old);
+            return old;
+        }
     }
 
     public Object delete(String id) {
