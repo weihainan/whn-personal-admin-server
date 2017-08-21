@@ -100,6 +100,10 @@ public class AdminService {
         if (admin == null || !admin.getToken().equals(tokens[1]) || DateTime.now().getMillis() >= admin.getExpireTime()) {
             result.put("state", "expired");
         }
+        // 如果过期 从缓存中清除
+        if (admin != null && "expired".equals(result.get("state"))) {
+            adminsCache.invalidate(admin.getId());
+        }
         return result;
     }
 
