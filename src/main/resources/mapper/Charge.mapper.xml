@@ -38,10 +38,10 @@
     <sql id="BaseWhere">
         <where>
             <if test="userId != null and userId != ''">
-                user_id = #{userId}
+              AND  user_id = #{userId}
             </if>
             <if test="yearAndMonth != null and yearAndMonth != ''">
-                left(create_time, 7) = #{yearAndMonth}
+              AND  left(create_time, 7) = #{yearAndMonth}
             </if>
         </where>
     </sql>
