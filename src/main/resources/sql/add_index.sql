@@ -1,0 +1,1 @@
+ALTER TABLE `charge` ADD INDEX `charge_userId_time_idx` ( `user_id`, `create_time`)

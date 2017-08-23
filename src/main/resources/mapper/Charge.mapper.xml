@@ -24,27 +24,27 @@
         select
         <include refid="Base_Column_List"/>
         from charge
-        <where>
-            <if test="yearAndMonth != null and yearAndMonth != ''">
-                left(create_time, 7) = #{yearAndMonth}
-            </if>
-        </where>
+        <include refid="BaseWhere"/>
         order by create_time desc
     </select>
 
     <select id="selectYearMonth" resultType="java.lang.String" parameterType="java.lang.String">
         select DISTINCT left(create_time, #{timePatten}) as time
         from charge
+        <include refid="BaseWhere"/>
+        order by create_time desc
+    </select>
+
+    <sql id="BaseWhere">
         <where>
             <if test="userId != null and userId != ''">
                 user_id = #{userId}
             </if>
-            <if test="year != null and year != ''">
-                left(create_time, 4) = #{year}
+            <if test="yearAndMonth != null and yearAndMonth != ''">
+                left(create_time, 7) = #{yearAndMonth}
             </if>
         </where>
-        order by create_time desc
-    </select>
+    </sql>
 
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -151,7 +151,7 @@
 
     <select id="statisticsDetails" parameterType="map" resultType="map">
         SELECT SUM(amount) as total, label FROM charge
-        WHERE user_id = #{userId} AND type=#{type} AND LEFT(create_time, #{timePatten}) = #{time}
+        WHERE user_id = #{userId} AND LEFT(create_time, #{timePatten}) = #{time}  AND type=#{type}
         GROUP BY label
     </select>
 
