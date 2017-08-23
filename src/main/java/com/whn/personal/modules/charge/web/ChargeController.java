@@ -35,7 +35,7 @@ public class ChargeController {
     }
 
     @RequestMapping(value = "/year_month", method = RequestMethod.GET)
-    public Object getYearMaonth() {
+    public Object getYearMonth() {
         return chargeService.getYearMonth();
     }
 
