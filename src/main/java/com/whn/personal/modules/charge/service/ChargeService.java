@@ -16,6 +16,7 @@ import com.whn.waf.common.support.PageableItems;
 import com.whn.waf.common.support.ParamBuilder;
 import com.whn.waf.common.utils.ObjectId;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -87,14 +88,16 @@ public class ChargeService {
     }
 
     public Object getYearMonth() {
+        List<Map> result = Lists.newArrayList();
+        String currentYearAndMonth = DateTime.now().toString("yyyy-MM");
+
         Map<String, Object> map = Maps.newHashMap();
         map.put("userId", context.getUserId());
         map.put("timePatten", 7);
         List<String> list = chargeMapper.selectYearMonth(map);
-        if (CollectionUtils.isEmpty(list)) {
-            return Collections.EMPTY_LIST;
+        if(!list.contains(currentYearAndMonth)){
+            result.add(ParamBuilder.of("time", currentYearAndMonth).build());
         }
-        List<Map> result = Lists.newArrayList();
         for (String value : list) {
             result.add(ParamBuilder.of("time", value).build());
         }
