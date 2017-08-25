@@ -56,6 +56,7 @@ public class AssignmentService {
     }
 
     public Object list(Map<String, Object> params) {
+        params.put("userId", context.getUserId());
         PageHelper.startPage((int) params.get("page"), (int) params.get("size"));
         Page<Assignment> page = assignmentMapper.select(params);
         return PageableItems.of(page.getResult(), page.getTotal());
