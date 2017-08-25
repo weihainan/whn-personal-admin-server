@@ -58,13 +58,6 @@ public class AssignmentService {
     public Object list(Map<String, Object> params) {
         PageHelper.startPage((int) params.get("page"), (int) params.get("size"));
         Page<Assignment> page = assignmentMapper.select(params);
-        return PageableItems.of(page.getResult(), page.getTotal(), new Function<Assignment, Object>() {
-            @Override
-            public Object apply(Assignment input) {
-                Map<String, Object> map = CommonUtil.toMap(input);
-                map.put("create_time", input.getCreateTime().getTime());
-                return map;
-            }
-        });
+        return PageableItems.of(page.getResult(), page.getTotal());
     }
 }
