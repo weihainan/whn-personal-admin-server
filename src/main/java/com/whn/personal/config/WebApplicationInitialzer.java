@@ -2,6 +2,7 @@ package com.whn.personal.config;
 
 import com.whn.waf.common.config.AbstractWebApplicationInitialzer;
 import com.whn.waf.common.config.ServiceConfigurerAdapter;
+import com.whn.waf.common.config.mybatis.MyBatisConfig;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
