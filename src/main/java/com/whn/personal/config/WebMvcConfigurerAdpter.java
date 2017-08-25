@@ -1,9 +1,7 @@
 package com.whn.personal.config;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.whn.personal.internal.intercptor.ContextResolveInterceptor;
 import com.whn.waf.common.config.AbstractWebMvcConfigurerAdpter;
-import com.whn.waf.common.support.WafJsonMapper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -18,13 +16,11 @@ import java.util.List;
 
 @Configuration
 @EnableScheduling
-//@PropertySource(value = {})
 public class WebMvcConfigurerAdpter extends AbstractWebMvcConfigurerAdpter {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         super.configureMessageConverters(converters);
-        WafJsonMapper.getMapper().enable(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS);
     }
 
     @Override

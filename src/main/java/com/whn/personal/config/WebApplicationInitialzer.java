@@ -20,7 +20,6 @@ public class WebApplicationInitialzer extends AbstractWebApplicationInitialzer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        //  return new Class[]{SafWebSecurityConfigurerAdapter.class};
         return null;
     }
 
