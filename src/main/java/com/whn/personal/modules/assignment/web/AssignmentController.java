@@ -1,6 +1,7 @@
 package com.whn.personal.modules.assignment.web;
 
 import com.whn.personal.modules.assignment.domain.Assignment;
+import com.whn.personal.modules.assignment.dto.ListDto;
 import com.whn.personal.modules.assignment.service.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class AssignmentController {
 
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public Object list(Map<String, Object> params) {
-        return assignmentService.list(params);
+    public Object list(ListDto dto) {
+        return assignmentService.list(dto);
     }
 }

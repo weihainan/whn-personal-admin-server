@@ -3,8 +3,10 @@ package com.whn.personal.modules.assignment.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.base.Function;
+import com.google.common.collect.Maps;
 import com.whn.personal.internal.support.AppContext;
 import com.whn.personal.modules.assignment.domain.Assignment;
+import com.whn.personal.modules.assignment.dto.ListDto;
 import com.whn.personal.modules.assignment.mapper.AssignmentMapper;
 import com.whn.waf.common.support.PageableItems;
 import com.whn.waf.common.utils.CommonUtil;
@@ -55,9 +57,10 @@ public class AssignmentService {
         return assignment;
     }
 
-    public Object list(Map<String, Object> params) {
+    public Object list(ListDto dto) {
+        Map<String, Object> params = Maps.newHashMap();
         params.put("userId", context.getUserId());
-        PageHelper.startPage((int) params.get("page"), (int) params.get("size"));
+        PageHelper.startPage((int) dto.getPage(), (int) dto.getSize());
         Page<Assignment> page = assignmentMapper.select(params);
         return PageableItems.of(page.getResult(), page.getTotal());
     }
