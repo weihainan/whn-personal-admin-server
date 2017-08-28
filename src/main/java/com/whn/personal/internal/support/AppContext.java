@@ -2,14 +2,8 @@ package com.whn.personal.internal.support;
 
 import com.whn.personal.modules.admin.domain.Admin;
 import com.whn.waf.common.context.Context;
-import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author weihainan.
@@ -23,14 +17,14 @@ public class AppContext extends Context {
     public AppContext() {
     }
 
-    private final static String KEY_USER_INFO = "user_info"; //当前用户信息
+    private final static String USER_INFO_KEY = "CURRENT_USER_INFO"; //当前用户信息
 
     public void setUserInfo(Admin userInfo) {
-        getRequest().setAttribute(KEY_USER_INFO, userInfo);
+        getRequest().setAttribute(USER_INFO_KEY, userInfo);
     }
 
     public Admin getUserInfo() {
-        return (Admin) getRequest().getAttribute(KEY_USER_INFO);
+        return (Admin) getRequest().getAttribute(USER_INFO_KEY);
     }
 
     public String getUserId() {
