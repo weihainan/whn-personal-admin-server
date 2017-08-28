@@ -29,10 +29,9 @@
     </select>
 
     <select id="selectYearMonth" resultType="java.lang.String" parameterType="java.lang.String">
-        select left(create_time, #{timePatten}) as time
+        select distinct(left(create_time, #{timePatten})) as time
         from charge
         <include refid="BaseWhere"/>
-        group by left(create_time, #{timePatten})
         order by create_time desc
     </select>
 
