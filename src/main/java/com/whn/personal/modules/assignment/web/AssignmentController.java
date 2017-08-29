@@ -26,7 +26,7 @@ public class AssignmentController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public Object add(@PathVariable String id) {
+    public Object delete(@PathVariable String id) {
         return assignmentService.delete(id);
     }
 
@@ -34,7 +34,6 @@ public class AssignmentController {
     public Object completed(@PathVariable String id) {
         return assignmentService.completed(id);
     }
-
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Object list(ListDto dto) {
