@@ -47,7 +47,7 @@ public class AssignmentService {
     public Assignment completed(String id) {
         Assignment assignment = assignmentMapper.selectByPrimaryKey(id);
         assignment.setCompleted(true);
-        assignmentMapper.insert(assignment);
+        assignmentMapper.updateByPrimaryKey(assignment);
         return assignment;
     }
 
