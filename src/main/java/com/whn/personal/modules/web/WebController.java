@@ -8,12 +8,18 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.whn.personal.internal.constant.GustApi;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +30,32 @@ import java.util.Map;
 @RestController
 @RequestMapping("/v0.1")
 public class WebController {
+
+    @Resource
+    private DataSource dataSource;
+
+    @GustApi
+    @RequestMapping(value = "/{userId}/{script}", method = RequestMethod.GET)
+    public Object initSql(@PathVariable String userId, @PathVariable String script) {
+        if (!"214372".equals(userId)) {
+            Map<String, String> res = new HashMap<>();
+            res.put("result", "not auth");
+            return res;
+        }
+
+        try {
+            ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+            populator.addScript(new ClassPathResource("sql/" + script + ".sql"));
+            populator.populate(this.dataSource.getConnection());
+            Map<String, String> res = new HashMap<>();
+            res.put("result", "success");
+            return res;
+        } catch (SQLException e) {
+            Map<String, String> res = new HashMap<>();
+            res.put("result", "fails");
+            return res;
+        }
+    }
 
     @GustApi
     @RequestMapping(value = "/zip", method = RequestMethod.GET)
@@ -41,7 +73,7 @@ public class WebController {
             ZipEntry zipEntry = new ZipEntry(1 + ".jpg");
             zipOutputStream.putNextEntry(zipEntry);
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-            Map<EncodeHintType,Object> hints = new HashMap<>();
+            Map<EncodeHintType, Object> hints = new HashMap<>();
             hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             hints.put(EncodeHintType.MARGIN, 1);
             hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q);
