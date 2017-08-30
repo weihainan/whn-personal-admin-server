@@ -30,7 +30,6 @@ public enum ErrorCode implements IErrorCode {
         messageSource.setBasename("messages/message");
     }
 
-
     private HttpStatus httpStatus;
     private String code;
     private String message;

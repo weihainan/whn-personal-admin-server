@@ -22,7 +22,6 @@ public class AssignmentController {
         return assignmentService.add(assignment);
     }
 
-
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Object delete(@PathVariable String id) {
         return assignmentService.delete(id);

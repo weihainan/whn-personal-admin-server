@@ -14,7 +14,6 @@ public class LoginAdminVo {
     @Length(min = 6, max = 20, message = "管理员密码为6~20位.")
     private String password;
 
-
     public String getId() {
         return id;
     }

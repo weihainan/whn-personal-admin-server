@@ -43,5 +43,4 @@ public class ChargeController {
     public Object statistics() {
         return chargeService.statistics();
     }
-
 }
