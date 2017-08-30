@@ -2,14 +2,12 @@ package com.whn.personal.modules.assignment.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import com.whn.personal.internal.support.AppContext;
 import com.whn.personal.modules.assignment.domain.Assignment;
 import com.whn.personal.modules.assignment.dto.ListDto;
 import com.whn.personal.modules.assignment.mapper.AssignmentMapper;
 import com.whn.waf.common.support.PageableItems;
-import com.whn.waf.common.utils.CommonUtil;
 import com.whn.waf.common.utils.ObjectId;
 import com.whn.waf.common.utils.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,8 +6,6 @@ import com.whn.personal.modules.assignment.service.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 /**
  * @author weihainan.
  * @since 0.1 created on 2017/7/13.
