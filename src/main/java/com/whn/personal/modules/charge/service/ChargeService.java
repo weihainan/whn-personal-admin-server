@@ -90,9 +90,10 @@ public class ChargeService {
         List<Map> result = Lists.newArrayList();
         String currentYearAndMonth = DateTime.now().toString("yyyy-MM");
 
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("userId", context.getUserId());
-        map.put("timePatten", 7);
+        Map<String, Object> map = ParamBuilder
+                .of("userId", context.getUserId())
+                .withParam("timePatten", 7)
+                .build();
         List<String> list = chargeMapper.selectYearMonth(map);
         if (!list.contains(currentYearAndMonth)) {
             result.add(ParamBuilder.of("time", currentYearAndMonth).build());

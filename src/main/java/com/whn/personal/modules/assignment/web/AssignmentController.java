@@ -1,6 +1,7 @@
 package com.whn.personal.modules.assignment.web;
 
 import com.whn.personal.modules.assignment.domain.Assignment;
+import com.whn.personal.modules.assignment.dto.ListDto;
 import com.whn.personal.modules.assignment.service.AssignmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class AssignmentController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public Object add(@PathVariable String id) {
+    public Object delete(@PathVariable String id) {
         return assignmentService.delete(id);
     }
 
@@ -34,9 +35,8 @@ public class AssignmentController {
         return assignmentService.completed(id);
     }
 
-
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public Object list(Map<String, Object> params) {
-        return assignmentService.list(params);
+    public Object list(ListDto dto) {
+        return assignmentService.list(dto);
     }
 }

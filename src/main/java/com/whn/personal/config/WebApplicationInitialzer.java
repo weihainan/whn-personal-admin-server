@@ -2,6 +2,7 @@ package com.whn.personal.config;
 
 import com.whn.waf.common.config.AbstractWebApplicationInitialzer;
 import com.whn.waf.common.config.ServiceConfigurerAdapter;
+import com.whn.waf.common.config.mybatis.MyBatisConfig;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,7 +20,6 @@ public class WebApplicationInitialzer extends AbstractWebApplicationInitialzer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        //  return new Class[]{SafWebSecurityConfigurerAdapter.class};
         return null;
     }
 

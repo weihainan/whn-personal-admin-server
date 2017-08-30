@@ -26,9 +26,11 @@
         from assignment
         <where>
             <if test="completed!=null and completed!=''">
-                completed = #{completed}
+                and completed = #{completed}
             </if>
+            and user_id = #{userId}
         </where>
+        order by completed , create_time desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from assignment
