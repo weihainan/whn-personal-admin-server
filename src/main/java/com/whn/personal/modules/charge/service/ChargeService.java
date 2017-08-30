@@ -94,7 +94,7 @@ public class ChargeService {
 
         Map<String, Object> map = ParamBuilder
                 .of("userId", context.getUserId())
-                .withParam("timePatten", TimePatten.yearmonth)
+                .withParam("timePatten", TimePatten.yearmonth.getValue())
                 .build();
         List<String> list = chargeMapper.selectYearMonth(map);
         if (!list.contains(currentYearAndMonth)) {
