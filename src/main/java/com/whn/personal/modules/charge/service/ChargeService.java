@@ -33,7 +33,6 @@ import java.util.Map;
  * @since 0.1 created on 2017/7/13.
  */
 @Service
-@Transactional
 public class ChargeService {
 
     @Autowired
@@ -42,8 +41,8 @@ public class ChargeService {
     @Resource
     private ChargeMapper chargeMapper;
 
+    @Transactional
     public Object add(Charge charge) {
-
         if (StringUtils.isBlank(charge.getId())) {
             charge.setUserId(context.getUserId());
             charge.setId(ObjectId.id());
@@ -62,6 +61,7 @@ public class ChargeService {
         }
     }
 
+    @Transactional
     public Object delete(String id) {
         Charge charge = chargeMapper.selectByPrimaryKey(id);
         checkOwner(charge);
@@ -75,6 +75,7 @@ public class ChargeService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Object search(SearchVo condition) {
         PageHelper.startPage((int) condition.getPage(), (int) condition.getSize());
         Map<String, Object> params = Maps.newHashMap();
@@ -86,6 +87,7 @@ public class ChargeService {
         return PageableItems.of(result.getResult(), result.getTotal());
     }
 
+    @Transactional(readOnly = true)
     public Object getYearMonth() {
         List<Map> result = Lists.newArrayList();
         String currentYearAndMonth = DateTime.now().toString("yyyy-MM");
@@ -104,6 +106,7 @@ public class ChargeService {
         return result;
     }
 
+    @Transactional(readOnly = true)
     public Object statistics() {
         Map<String, Object> statistics = Maps.newHashMap();
 

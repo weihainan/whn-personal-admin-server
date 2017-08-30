@@ -23,7 +23,6 @@ import java.util.Map;
  */
 
 @Service
-@Transactional
 public class AssignmentService {
 
     @Autowired
@@ -32,6 +31,7 @@ public class AssignmentService {
     @Autowired
     private AppContext context;
 
+    @Transactional
     public Assignment add(Assignment assignment) {
         ValidatorUtil.validateAndThrow(assignment);
         assignment.setUserId(context.getUserId());
@@ -42,6 +42,7 @@ public class AssignmentService {
         return assignment;
     }
 
+    @Transactional
     public Assignment completed(String id) {
         Assignment assignment = assignmentMapper.selectByPrimaryKey(id);
         assignment.setCompleted(true);
@@ -49,12 +50,14 @@ public class AssignmentService {
         return assignment;
     }
 
+    @Transactional
     public Assignment delete(String id) {
         Assignment assignment = assignmentMapper.selectByPrimaryKey(id);
         assignmentMapper.deleteByPrimaryKey(id);
         return assignment;
     }
 
+    @Transactional(readOnly = true)
     public Object list(ListDto dto) {
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", context.getUserId());

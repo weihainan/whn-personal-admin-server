@@ -20,11 +20,11 @@ import java.util.Date;
  * @since 0.1 created on 2017/7/13.
  */
 @Service
-@Transactional
 public class ChargeLabelService {
     @Autowired
     private ChargeLabelMapper chargeLabelMapper;
 
+    @Transactional
     public Object add(ChargeLabel label) {
         label.setCreateTime(new Date());
         label.setId(DigestUtils.md5Hex(String.format("%s", label.getName())));
@@ -37,6 +37,7 @@ public class ChargeLabelService {
         return label;
     }
 
+    @Transactional
     public Object delete(String id) {
         ChargeLabel oldOne = chargeLabelMapper.selectByPrimaryKey(id);
         if (oldOne == null) {
@@ -46,6 +47,7 @@ public class ChargeLabelService {
         return oldOne;
     }
 
+    @Transactional(readOnly = true)
     public Object selectAll(int page, int size, boolean all) {
         if (!all) {
             PageHelper.startPage(page, size);

@@ -18,7 +18,6 @@ import java.util.Random;
  * @since 0.1 created on 2017/8/1.
  */
 @Service
-@Transactional
 public class AppleService {
 
     @Autowired
@@ -27,10 +26,12 @@ public class AppleService {
     @Autowired
     private ApplesMapper applesMapper;
 
+    @Transactional(readOnly = true)
     public List<Apple> selectList() {
         return applesMapper.selectList(context.getUserId());
     }
 
+    @Transactional
     public Apple add() {
         Apple apple = new Apple();
         apple.setWeight(new Random().nextInt(65) + 200);
@@ -41,6 +42,7 @@ public class AppleService {
         return apple;
     }
 
+    @Transactional
     public Apple eat(int id) {
         Apple apple = applesMapper.selectByPrimaryKey(id);
         if (apple == null) {

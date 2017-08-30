@@ -34,7 +34,6 @@ import static com.whn.personal.internal.constant.ErrorCode.LOGIN_ERROR;
  * @since 0.1 created on 2017/7/13.
  */
 @Service
-@Transactional
 public class AdminService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminService.class);
@@ -42,6 +41,7 @@ public class AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
+    @Transactional
     public Object add(Admin admin) {
 
         ValidatorUtil.validateAndThrow(admin);
@@ -60,7 +60,7 @@ public class AdminService {
         admin.setExpireTime(DateTime.now().dayOfMonth().addToCopy(7).getMillis());
     }
 
-
+    @Transactional
     public Admin login(LoginAdminVo loginAdminVo) {
         ValidatorUtil.validateAndThrow(loginAdminVo);
         Admin admin = getById(loginAdminVo.getId());
@@ -78,6 +78,7 @@ public class AdminService {
     private Cache<String, Admin> adminsCache = CacheBuilder.newBuilder().
             maximumSize(100).expireAfterWrite(3600, TimeUnit.SECONDS).build();
 
+    @Transactional
     public Admin getById(final String id) {
         try {
             return adminsCache.get(id, new Callable<Admin>() {
@@ -115,6 +116,7 @@ public class AdminService {
         refreshExpiredToken();
     }
 
+    @Transactional
     public void refreshExpiredToken() {
         LOGGER.info(" start refresh admin token");
         int count = 0;
