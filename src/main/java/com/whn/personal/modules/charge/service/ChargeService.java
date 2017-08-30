@@ -24,7 +24,6 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +94,7 @@ public class ChargeService {
         map.put("userId", context.getUserId());
         map.put("timePatten", 7);
         List<String> list = chargeMapper.selectYearMonth(map);
-        if(!list.contains(currentYearAndMonth)){
+        if (!list.contains(currentYearAndMonth)) {
             result.add(ParamBuilder.of("time", currentYearAndMonth).build());
         }
         for (String value : list) {

@@ -111,7 +111,11 @@ public class AdminService {
      * 每天0点更新过期的token
      */
     @Scheduled(cron = "0 0 0 * * ? ")
-    public void refreshAdminToken() {
+    public void refreshTokenTask() {
+        refreshExpiredToken();
+    }
+
+    public void refreshExpiredToken() {
         LOGGER.info(" start refresh admin token");
         int count = 0;
         List<Admin> adminList = adminMapper.selectExpired(DateTime.now().getMillis());
