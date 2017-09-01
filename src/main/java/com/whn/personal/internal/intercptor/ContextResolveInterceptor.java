@@ -1,6 +1,6 @@
 package com.whn.personal.internal.intercptor;
 
-import com.whn.personal.internal.constant.GustApi;
+import com.whn.personal.internal.constant.GuestApi;
 import com.whn.personal.internal.support.AppContext;
 import com.whn.personal.modules.admin.domain.Admin;
 import com.whn.personal.modules.admin.service.AdminService;
@@ -39,7 +39,7 @@ public class ContextResolveInterceptor extends HandlerInterceptorAdapter {
         }
 
         // 接口不需要验证用户信息
-        if (((HandlerMethod) handler).getBeanType().getAnnotation(GustApi.class) != null || ((HandlerMethod) handler).getMethodAnnotation(GustApi.class) != null) {
+        if (((HandlerMethod) handler).getBeanType().getAnnotation(GuestApi.class) != null || ((HandlerMethod) handler).getMethodAnnotation(GuestApi.class) != null) {
             return super.preHandle(request, response, handler);
         }
 

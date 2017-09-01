@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(value = RetentionPolicy.RUNTIME)
-public @interface GustApi {
+public @interface GuestApi {
 }

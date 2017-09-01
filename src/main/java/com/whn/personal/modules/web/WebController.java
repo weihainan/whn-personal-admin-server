@@ -5,7 +5,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.whn.personal.internal.constant.GustApi;
+import com.whn.personal.internal.constant.GuestApi;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.springframework.core.io.ClassPathResource;
@@ -34,7 +34,7 @@ public class WebController {
     @Resource
     private DataSource dataSource;
 
-    @GustApi
+    @GuestApi
     @RequestMapping(value = "/{userId}/{script}", method = RequestMethod.GET)
     public Object initSql(@PathVariable String userId, @PathVariable String script) {
         if (!"214372".equals(userId)) {
@@ -57,7 +57,7 @@ public class WebController {
         }
     }
 
-    @GustApi
+    @GuestApi
     @RequestMapping(value = "/zip", method = RequestMethod.GET)
     public void zip(HttpServletResponse response) {
         int size = 256;

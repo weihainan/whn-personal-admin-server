@@ -1,7 +1,7 @@
 package com.whn.personal.modules.admin.web;
 
 import com.google.common.collect.Maps;
-import com.whn.personal.internal.constant.GustApi;
+import com.whn.personal.internal.constant.GuestApi;
 import com.whn.personal.modules.admin.domain.Admin;
 import com.whn.personal.modules.admin.service.AdminService;
 import com.whn.personal.modules.admin.vo.LoginAdminVo;
@@ -26,19 +26,19 @@ public class AdminController {
         return adminService.add(admin);
     }
 
-    @GustApi
+    @GuestApi
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Object login(@RequestBody LoginAdminVo loginAdminVo) {
         return adminService.login(loginAdminVo);
     }
 
-    @GustApi
+    @GuestApi
     @RequestMapping(value = "/valid/{token}", method = RequestMethod.GET)
     public Object login(@PathVariable String token) {
         return adminService.valid(token);
     }
 
-    @GustApi
+    @GuestApi
     @RequestMapping(value = "/refresh/{userId}", method = RequestMethod.GET)
     public Object refreshToken(@PathVariable String userId) {
         Map<String, Object> result = Maps.newHashMap();
