@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,5 +65,30 @@ public class AssignmentService {
         PageHelper.startPage((int) dto.getPage(), (int) dto.getSize());
         Page<Assignment> page = assignmentMapper.select(params);
         return PageableItems.of(page.getResult(), page.getTotal());
+    }
+
+    @Transactional
+    public Object completeAll() {
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("userId", context.getUserId());
+        params.put("completed", false);
+        List<Assignment> assignmentList = assignmentMapper.select(params).getResult();
+        for (Assignment assignment : assignmentList) {
+            assignment.setCompleted(true);
+            assignmentMapper.updateByPrimaryKey(assignment);
+        }
+        return PageableItems.of(assignmentList, assignmentList.size());
+    }
+
+    @Transactional
+    public Object deleteAllCompleted() {
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("userId", context.getUserId());
+        params.put("completed", true);
+        List<Assignment> assignmentList = assignmentMapper.select(params).getResult();
+        for (Assignment assignment : assignmentList) {
+            assignmentMapper.deleteByPrimaryKey(assignment.getId());
+        }
+        return PageableItems.of(assignmentList, assignmentList.size());
     }
 }

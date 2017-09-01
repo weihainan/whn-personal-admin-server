@@ -36,4 +36,14 @@ public class AssignmentController {
     public Object list(ListDto dto) {
         return assignmentService.list(dto);
     }
+
+    @RequestMapping(value = "/complete_all")
+    public Object completeAll() {
+        return assignmentService.completeAll();
+    }
+
+    @RequestMapping(value = "/delete_all_completed")
+    public Object deleteAllCompleted() {
+        return assignmentService.deleteAllCompleted();
+    }
 }
