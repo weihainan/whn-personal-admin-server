@@ -53,7 +53,7 @@ public class ChargeLabelService {
             PageHelper.startPage(page, size);
             Page<ChargeLabel> result = chargeLabelMapper.selectAll();
             return PageableItems.of(result.getResult(), result.getTotal());
-        }else{
+        } else {
             Page<ChargeLabel> result = chargeLabelMapper.selectAll();
             return SimpleItems.of(result.getResult());
         }
