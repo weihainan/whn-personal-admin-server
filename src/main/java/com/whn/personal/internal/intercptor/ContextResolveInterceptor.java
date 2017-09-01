@@ -46,6 +46,7 @@ public class ContextResolveInterceptor extends HandlerInterceptorAdapter {
         String token = request.getHeader("Authorization");
         if (StringUtils.isBlank(token) || !token.contains("-")) {
             // 没有用户信息
+            logger.error("Login error {}", MISSING_USER_INFO.getCode());
             throw WafBizException.of(MISSING_USER_INFO);
         }
 
@@ -53,6 +54,7 @@ public class ContextResolveInterceptor extends HandlerInterceptorAdapter {
         Admin admin = adminService.getById(tokens[0]);
         if (admin == null || !admin.getToken().equals(tokens[1]) || DateTime.now().getMillis() >= admin.getExpireTime()) {
             // token过期
+            logger.error("Login error {} {}", TOKEN_EXPIRED.getCode(), token);
             throw WafBizException.of(TOKEN_EXPIRED);
         }
 
