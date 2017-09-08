@@ -33,7 +33,6 @@ public class AppContext extends Context {
 
     public String getUserName() {
         if (getUserInfo() == null) return null;
-        Object realName = getUserInfo().getName();
-        return (String) realName;
+        return getUserInfo().getName();
     }
 }
