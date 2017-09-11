@@ -42,7 +42,6 @@ public class AdminController {
     @Autowired
     private TaskExecutor taskExecutor;
 
-
     @GuestApi
     @RequestMapping(value = "/refresh/{userId}", method = RequestMethod.GET)
     public Object refreshToken(@PathVariable String userId) {
@@ -61,4 +60,3 @@ public class AdminController {
         return result;
     }
 }
-
