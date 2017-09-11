@@ -6,6 +6,7 @@ import com.whn.personal.modules.admin.domain.Admin;
 import com.whn.personal.modules.admin.service.AdminService;
 import com.whn.personal.modules.admin.vo.LoginAdminVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -38,6 +39,10 @@ public class AdminController {
         return adminService.valid(token);
     }
 
+    @Autowired
+    private TaskExecutor taskExecutor;
+
+
     @GuestApi
     @RequestMapping(value = "/refresh/{userId}", method = RequestMethod.GET)
     public Object refreshToken(@PathVariable String userId) {
@@ -46,7 +51,12 @@ public class AdminController {
             result.put("result", "not auth");
             return result;
         }
-        adminService.refreshExpiredToken();
+        taskExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                adminService.refreshExpiredToken();
+            }
+        });
         result.put("result", "success");
         return result;
     }
