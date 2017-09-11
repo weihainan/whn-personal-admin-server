@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Maps;
 import com.whn.personal.internal.support.AppContext;
+import com.whn.personal.internal.support.PageHelperUtils;
 import com.whn.personal.modules.assignment.domain.Assignment;
 import com.whn.personal.modules.assignment.dto.ListDto;
 import com.whn.personal.modules.assignment.mapper.AssignmentMapper;
@@ -62,7 +63,7 @@ public class AssignmentService {
     public Object list(ListDto dto) {
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", context.getUserId());
-        PageHelper.startPage((int) dto.getPage(), (int) dto.getSize());
+        PageHelperUtils.paging(dto.getPage(), dto.getSize());
         Page<Assignment> page = assignmentMapper.select(params);
         return PageableItems.of(page.getResult(), page.getTotal());
     }

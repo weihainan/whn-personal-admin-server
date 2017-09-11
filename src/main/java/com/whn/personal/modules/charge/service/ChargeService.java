@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.whn.personal.internal.constant.ErrorCode;
 import com.whn.personal.internal.support.AppContext;
+import com.whn.personal.internal.support.PageHelperUtils;
 import com.whn.personal.modules.charge.domain.Charge;
 import com.whn.personal.modules.charge.enums.ChargeType;
 import com.whn.personal.modules.charge.enums.TimePatten;
@@ -77,7 +78,7 @@ public class ChargeService {
 
     @Transactional(readOnly = true)
     public Object search(SearchVo condition) {
-        PageHelper.startPage((int) condition.getPage(), (int) condition.getSize());
+        PageHelperUtils.paging(condition.getPage(), condition.getSize());
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", context.getUserId());
         if (StringUtils.isNotBlank(condition.getYearAndMonth())) {

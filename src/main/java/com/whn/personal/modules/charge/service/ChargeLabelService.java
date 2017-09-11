@@ -3,6 +3,7 @@ package com.whn.personal.modules.charge.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.whn.personal.internal.constant.ErrorCode;
+import com.whn.personal.internal.support.PageHelperUtils;
 import com.whn.personal.modules.charge.domain.ChargeLabel;
 import com.whn.personal.modules.charge.mapper.ChargeLabelMapper;
 import com.whn.waf.common.exception.WafBizException;
@@ -50,7 +51,7 @@ public class ChargeLabelService {
     @Transactional(readOnly = true)
     public Object selectAll(int page, int size, boolean all) {
         if (!all) {
-            PageHelper.startPage(page, size);
+            PageHelperUtils.paging(page, size);
             Page<ChargeLabel> result = chargeLabelMapper.selectAll();
             return PageableItems.of(result.getResult(), result.getTotal());
         } else {

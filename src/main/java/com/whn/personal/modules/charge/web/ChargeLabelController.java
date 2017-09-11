@@ -1,5 +1,6 @@
 package com.whn.personal.modules.charge.web;
 
+import com.whn.personal.internal.constant.GuestApi;
 import com.whn.personal.modules.charge.domain.ChargeLabel;
 import com.whn.personal.modules.charge.service.ChargeLabelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class ChargeLabelController {
         return chargeLabelService.delete(id);
     }
 
+    @GuestApi
     @RequestMapping(method = RequestMethod.GET)
     public Object selectAll(@RequestParam(value = "page", required = false, defaultValue = "0") int page,
                          @RequestParam(value = "size", required = false, defaultValue = "10") int size,
