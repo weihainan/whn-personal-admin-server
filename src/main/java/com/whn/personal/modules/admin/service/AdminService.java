@@ -12,6 +12,7 @@ import com.whn.waf.common.utils.CommonUtil;
 import com.whn.waf.common.utils.Encrypt;
 import com.whn.waf.common.utils.ValidatorUtil;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,8 @@ public class AdminService {
 
     private void refreshToken(Admin admin) {
         admin.setToken(CommonUtil.uuid());
-        admin.setExpireTime(DateTime.now().dayOfMonth().addToCopy(7).getMillis());
+        LocalDate localDate = LocalDate.now().dayOfMonth().addToCopy(8);
+        admin.setExpireTime(new DateTime(localDate.toDate()).getMillis() - 1);
     }
 
     @Transactional
