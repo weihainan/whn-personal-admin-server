@@ -35,7 +35,7 @@ public class AdminController {
 
     @GuestApi
     @RequestMapping(value = "/valid/{token}", method = RequestMethod.GET)
-    public Object login(@PathVariable String token) {
+    public Object valid(@PathVariable String token) {
         return adminService.valid(token);
     }
 
