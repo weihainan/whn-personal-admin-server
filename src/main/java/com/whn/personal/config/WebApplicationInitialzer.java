@@ -2,6 +2,7 @@ package com.whn.personal.config;
 
 import com.whn.waf.common.config.AbstractWebApplicationInitialzer;
 import com.whn.waf.common.config.ServiceConfigurerAdapter;
+import com.whn.waf.common.config.mongo.MongoConfigurerAdapter;
 import com.whn.waf.common.config.mybatis.MyBatisConfig;
 
 import javax.servlet.ServletContext;
@@ -14,7 +15,8 @@ public class WebApplicationInitialzer extends AbstractWebApplicationInitialzer {
         return new Class[]{
                 WebMvcConfigurerAdpter.class,
                 ServiceConfigurerAdapter.class,
-                MyBatisConfig.class
+                MyBatisConfig.class,
+                MongoConfigurerAdapter.class
         };
     }
 
