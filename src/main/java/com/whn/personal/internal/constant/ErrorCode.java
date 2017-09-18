@@ -1,6 +1,7 @@
 package com.whn.personal.internal.constant;
 
 import com.whn.waf.common.base.constant.IErrorCode;
+import com.whn.waf.common.context.WafProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -33,7 +34,7 @@ public enum ErrorCode implements IErrorCode {
     private HttpStatus httpStatus;
     private String code;
     private String message;
-    private static final String PREFIX = "DESIGN_METHOD/";
+    private static final String PREFIX = WafProperties.getErrorCodePrefix();
 
     ErrorCode(HttpStatus httpStatus, String code, String message) {
         setHttpStatus(httpStatus);
