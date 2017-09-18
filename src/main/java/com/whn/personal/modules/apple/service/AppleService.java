@@ -34,12 +34,16 @@ public class AppleService {
     @Transactional
     public Apple add() {
         Apple apple = new Apple();
-        apple.setWeight(new Random().nextInt(65) + 200);
+        apple.setWeight(getWeightOnBase(65, 200));
         apple.setIsEaten(false);
         apple.setUserId(context.getUserId());
         apple.setCreateTime(new Date());
         applesMapper.insert(apple);
         return apple;
+    }
+
+    private int getWeightOnBase(int weight, int base) {
+        return new Random().nextInt(weight) + base;
     }
 
     @Transactional
