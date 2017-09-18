@@ -36,7 +36,7 @@ public class RateLimiterController {
      * 或者如果无法在timeout 过期之前获取得到许可的话，那么立即返回false（无需等待）
      */
     @RequestMapping("/buy")
-    public Object miao(int count, String code) {
+    public Object miao() {
         //判断能否在1秒内得到令牌，如果不能则立即返回false，不会阻塞程序
         if (!rateLimiter.tryAcquire(1000, TimeUnit.MILLISECONDS)) {
             System.out.println("短期无法获取令牌，真不幸，排队也瞎排");
