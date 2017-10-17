@@ -37,7 +37,8 @@ public class WebController {
     @GuestApi
     @RequestMapping(value = "/{userId}/{script}", method = RequestMethod.GET)
     public Object initSql(@PathVariable String userId, @PathVariable String script) {
-        if (!"214372".equals(userId)) {
+        String admin = "214372";
+        if (!admin.equals(userId)) {
             Map<String, String> res = new HashMap<>();
             res.put("result", "not auth");
             return res;

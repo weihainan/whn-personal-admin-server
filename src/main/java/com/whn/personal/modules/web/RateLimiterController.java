@@ -16,6 +16,9 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping(value = "/v0.1/rate_limiter")
 public class RateLimiterController {
 
+    private int miaosha = 10;
+    private int timeout = 1000;
+
     private volatile int count = 0;
 
     RateLimiter rateLimiter = RateLimiter.create(1);
@@ -23,7 +26,7 @@ public class RateLimiterController {
     @RequestMapping("/miaosha")
     public Object miaosha() {
         System.out.println("等待时间" + rateLimiter.acquire());
-        if (count < 10) {
+        if (count < miaosha) {
             count++;
             return "购买成功";
         }
@@ -38,11 +41,11 @@ public class RateLimiterController {
     @RequestMapping("/buy")
     public Object miao() {
         //判断能否在1秒内得到令牌，如果不能则立即返回false，不会阻塞程序
-        if (!rateLimiter.tryAcquire(1000, TimeUnit.MILLISECONDS)) {
+        if (!rateLimiter.tryAcquire(timeout, TimeUnit.MILLISECONDS)) {
             System.out.println("短期无法获取令牌，真不幸，排队也瞎排");
             return "失败";
         }
-        if (count > 10) {
+        if (count > miaosha) {
             System.out.println("购买成功");
             return "成功";
         }

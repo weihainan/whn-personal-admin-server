@@ -42,6 +42,7 @@ public enum ErrorCode implements IErrorCode {
         setMessage(message);
     }
 
+    @Override
     public HttpStatus getHttpStatus() {
         return this.httpStatus;
     }
@@ -50,6 +51,7 @@ public enum ErrorCode implements IErrorCode {
         this.httpStatus = httpStatus;
     }
 
+    @Override
     public String getCode() {
         return PREFIX + this.code;
     }
@@ -58,6 +60,7 @@ public enum ErrorCode implements IErrorCode {
         this.code = code;
     }
 
+    @Override
     public String getMessage() {
         return this.message;
     }

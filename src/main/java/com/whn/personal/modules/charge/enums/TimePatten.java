@@ -5,7 +5,15 @@ package com.whn.personal.modules.charge.enums;
  * @since 0.1 created on 2017/7/20.
  */
 public enum TimePatten {
-    year(4), yearmonth(7);
+    /**
+     * Mysql 选年份
+     */
+    year(4),
+
+    /**
+     * Mysql 选年月
+     */
+    yearmonth(7);
 
     private int value;
 
