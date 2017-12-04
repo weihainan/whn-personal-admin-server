@@ -1,5 +1,6 @@
 package com.whn.personal.modules.admin.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ public class Admin {
     @Length(min = 3, max = 20, message = "管理员名称为6~20位.")
     private String name;
 
+    @JsonIgnore // 登陆后返回的实体不包含密码
     @Length(min = 6, max = 20, message = "管理员密码为6~20位.")
     private String password;
     private Date createTime;
