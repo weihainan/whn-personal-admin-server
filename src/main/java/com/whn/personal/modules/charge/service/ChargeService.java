@@ -35,7 +35,7 @@ import java.util.Map;
 public class ChargeService {
 
     @Resource
-    private AppContext context;
+    private AppContext appContext;
 
     @Resource
     private ChargeMapper chargeMapper;
@@ -43,7 +43,7 @@ public class ChargeService {
     @Transactional
     public Object add(Charge charge) {
         if (StringUtils.isBlank(charge.getId())) {
-            charge.setUserId(context.getUserId());
+            charge.setUserId(appContext.getUserId());
             charge.setId(ObjectId.id());
             charge.setCreateTime(new Date());
             chargeMapper.insert(charge);
@@ -69,7 +69,7 @@ public class ChargeService {
     }
 
     private void checkOwner(Charge charge) {
-        if (!charge.getUserId().equals(context.getUserId())) {
+        if (!charge.getUserId().equals(appContext.getUserId())) {
             throw WafBizException.of(ErrorCode.DATA_NOT_EXIST);
         }
     }
@@ -78,7 +78,7 @@ public class ChargeService {
     public Object search(SearchVo condition) {
         PageHelperUtils.paging(condition.getPage(), condition.getSize());
         Map<String, Object> params = Maps.newHashMap();
-        params.put("userId", context.getUserId());
+        params.put("userId", appContext.getUserId());
         if (StringUtils.isNotBlank(condition.getYearAndMonth())) {
             params.put("yearAndMonth", condition.getYearAndMonth());
         }
@@ -92,7 +92,7 @@ public class ChargeService {
         String currentYearAndMonth = DateTime.now().toString("yyyy-MM");
 
         Map<String, Object> map = ParamBuilder
-                .of("userId", context.getUserId())
+                .of("userId", appContext.getUserId())
                 .withParam("timePatten", TimePatten.yearmonth.getValue())
                 .build();
         List<String> list = chargeMapper.selectYearMonth(map);
@@ -110,7 +110,7 @@ public class ChargeService {
         Map<String, Object> statistics = Maps.newHashMap();
 
         Map<String, Object> map = Maps.newHashMap();
-        map.put("userId", context.getUserId());
+        map.put("userId", appContext.getUserId());
         map.put("timePatten", TimePatten.year.getValue());
         List<String> years = chargeMapper.selectYearMonth(map);
         for (String year : years) {
@@ -148,7 +148,7 @@ public class ChargeService {
 
             Map<String, Object> details = Maps.newHashMap();
             map = Maps.newHashMap();
-            map.put("userId", context.getUserId());
+            map.put("userId", appContext.getUserId());
             map.put("timePatten", TimePatten.yearmonth.getValue());
             List<String> monthAndYears = chargeMapper.selectYearMonth(map);
             for (String monthAndYear : monthAndYears) {
@@ -196,7 +196,7 @@ public class ChargeService {
 
     private void params(Map<String, Object> map, String monthAndYear, ChargeType receipts, int value) {
         map.clear();
-        map.put("userId", context.getUserId());
+        map.put("userId", appContext.getUserId());
         map.put("time", monthAndYear);
         map.put("type", receipts);
         map.put("timePatten", value);

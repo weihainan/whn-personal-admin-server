@@ -30,12 +30,12 @@ public class AssignmentService {
     private AssignmentMapper assignmentMapper;
 
     @Resource
-    private AppContext context;
+    private AppContext appContext;
 
     @Transactional
     public Assignment add(Assignment assignment) {
         ValidatorUtil.validateAndThrow(assignment);
-        assignment.setUserId(context.getUserId());
+        assignment.setUserId(appContext.getUserId());
         assignment.setCreateTime(new Date());
         assignment.setCompleted(false);
         assignment.setId(ObjectId.ID());
@@ -61,7 +61,7 @@ public class AssignmentService {
     @Transactional(readOnly = true)
     public Object list(ListDto dto) {
         Map<String, Object> params = Maps.newHashMap();
-        params.put("userId", context.getUserId());
+        params.put("userId", appContext.getUserId());
         PageHelperUtils.paging(dto.getPage(), dto.getSize());
         Page<Assignment> page = assignmentMapper.select(params);
         return PageableItems.of(page.getResult(), page.getTotal());
@@ -70,7 +70,7 @@ public class AssignmentService {
     @Transactional
     public Object completeAll() {
         Map<String, Object> params = Maps.newHashMap();
-        params.put("userId", context.getUserId());
+        params.put("userId", appContext.getUserId());
         params.put("completed", false);
         List<Assignment> assignmentList = assignmentMapper.select(params).getResult();
         for (Assignment assignment : assignmentList) {
@@ -83,7 +83,7 @@ public class AssignmentService {
     @Transactional
     public Object deleteAllCompleted() {
         Map<String, Object> params = Maps.newHashMap();
-        params.put("userId", context.getUserId());
+        params.put("userId", appContext.getUserId());
         params.put("completed", true);
         List<Assignment> assignmentList = assignmentMapper.select(params).getResult();
         for (Assignment assignment : assignmentList) {

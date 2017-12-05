@@ -21,14 +21,14 @@ import java.util.Random;
 public class AppleService {
 
     @Resource
-    private AppContext context;
+    private AppContext appContext;
 
     @Resource
     private ApplesMapper applesMapper;
 
     @Transactional(readOnly = true)
     public List<Apple> selectList() {
-        return applesMapper.selectList(context.getUserId());
+        return applesMapper.selectList(appContext.getUserId());
     }
 
     @Transactional
@@ -36,7 +36,7 @@ public class AppleService {
         Apple apple = new Apple();
         apple.setWeight(getWeightOnBase(65, 200));
         apple.setIsEaten(false);
-        apple.setUserId(context.getUserId());
+        apple.setUserId(appContext.getUserId());
         apple.setCreateTime(new Date());
         applesMapper.insert(apple);
         return apple;
@@ -52,7 +52,7 @@ public class AppleService {
         if (apple == null) {
             throw WafBizException.of(ErrorCode.DATA_NOT_EXIST);
         }
-        if (!context.getUserId().equals(apple.getUserId())) {
+        if (!appContext.getUserId().equals(apple.getUserId())) {
             throw WafBizException.of(ErrorCode.DATA_NOT_EXIST);
         }
         apple.setIsEaten(true);
