@@ -1,7 +1,6 @@
 package com.whn.personal.modules.charge.service;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.whn.personal.internal.constant.ErrorCode;
 import com.whn.personal.internal.support.PageHelperUtils;
 import com.whn.personal.modules.charge.domain.ChargeLabel;
@@ -10,10 +9,10 @@ import com.whn.waf.common.exception.WafBizException;
 import com.whn.waf.common.support.PageableItems;
 import com.whn.waf.common.support.SimpleItems;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 /**
@@ -22,7 +21,7 @@ import java.util.Date;
  */
 @Service
 public class ChargeLabelService {
-    @Autowired
+    @Resource
     private ChargeLabelMapper chargeLabelMapper;
 
     @Transactional

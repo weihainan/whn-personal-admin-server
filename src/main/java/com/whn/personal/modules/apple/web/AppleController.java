@@ -1,11 +1,12 @@
 package com.whn.personal.modules.apple.web;
 
 import com.whn.personal.modules.apple.service.AppleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * @author Administrator.
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/v0.1/apples")
 public class AppleController {
 
-    @Autowired
+    @Resource
     private AppleService appleService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)

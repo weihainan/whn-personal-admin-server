@@ -1,7 +1,6 @@
 package com.whn.personal.modules.assignment.service;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Maps;
 import com.whn.personal.internal.support.AppContext;
 import com.whn.personal.internal.support.PageHelperUtils;
@@ -11,10 +10,10 @@ import com.whn.personal.modules.assignment.mapper.AssignmentMapper;
 import com.whn.waf.common.support.PageableItems;
 import com.whn.waf.common.utils.ObjectId;
 import com.whn.waf.common.utils.ValidatorUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +26,10 @@ import java.util.Map;
 @Service
 public class AssignmentService {
 
-    @Autowired
+    @Resource
     private AssignmentMapper assignmentMapper;
 
-    @Autowired
+    @Resource
     private AppContext context;
 
     @Transactional

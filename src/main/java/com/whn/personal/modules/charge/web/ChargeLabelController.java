@@ -3,8 +3,9 @@ package com.whn.personal.modules.charge.web;
 import com.whn.personal.internal.constant.GuestApi;
 import com.whn.personal.modules.charge.domain.ChargeLabel;
 import com.whn.personal.modules.charge.service.ChargeLabelService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author weihainan.
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/v0.1/personal/charge_labels")
 public class ChargeLabelController {
 
-    @Autowired
+    @Resource
     private ChargeLabelService chargeLabelService;
 
     @RequestMapping(method = RequestMethod.POST)

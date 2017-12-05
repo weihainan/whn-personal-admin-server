@@ -3,9 +3,10 @@ package com.whn.personal.modules.charge.web;
 import com.whn.personal.modules.charge.domain.Charge;
 import com.whn.personal.modules.charge.service.ChargeService;
 import com.whn.personal.modules.charge.vo.SearchVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author weihainan.
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/v0.1/personal/charges")
 public class ChargeController {
 
-    @Autowired
+    @Resource
     private ChargeService chargeService;
 
     @RequestMapping(method = RequestMethod.POST)

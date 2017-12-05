@@ -5,10 +5,10 @@ import com.whn.personal.internal.support.AppContext;
 import com.whn.personal.modules.apple.domain.Apple;
 import com.whn.personal.modules.apple.mapper.ApplesMapper;
 import com.whn.waf.common.exception.WafBizException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -20,10 +20,10 @@ import java.util.Random;
 @Service
 public class AppleService {
 
-    @Autowired
+    @Resource
     private AppContext context;
 
-    @Autowired
+    @Resource
     private ApplesMapper applesMapper;
 
     @Transactional(readOnly = true)

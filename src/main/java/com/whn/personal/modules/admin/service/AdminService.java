@@ -15,12 +15,12 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +39,7 @@ public class AdminService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminService.class);
 
-    @Autowired
+    @Resource
     private AdminMapper adminMapper;
 
     @Transactional

@@ -3,8 +3,9 @@ package com.whn.personal.modules.assignment.web;
 import com.whn.personal.modules.assignment.domain.Assignment;
 import com.whn.personal.modules.assignment.dto.ListDto;
 import com.whn.personal.modules.assignment.service.AssignmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author weihainan.
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/v0.1/personal/assignments")
 public class AssignmentController {
 
-    @Autowired
+    @Resource
     private AssignmentService assignmentService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)

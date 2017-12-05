@@ -5,10 +5,10 @@ import com.whn.personal.internal.constant.GuestApi;
 import com.whn.personal.modules.admin.domain.Admin;
 import com.whn.personal.modules.admin.service.AdminService;
 import com.whn.personal.modules.admin.vo.LoginAdminVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -19,7 +19,7 @@ import java.util.Map;
 @RequestMapping(value = "/v0.1/personal/admins")
 public class AdminController {
 
-    @Autowired
+    @Resource
     private AdminService adminService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -39,7 +39,7 @@ public class AdminController {
         return adminService.valid(token);
     }
 
-    @Autowired
+    @Resource
     private TaskExecutor taskExecutor;
 
     @GuestApi

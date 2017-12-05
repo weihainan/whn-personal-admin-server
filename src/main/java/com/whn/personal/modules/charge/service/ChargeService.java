@@ -1,7 +1,6 @@
 package com.whn.personal.modules.charge.service;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.whn.personal.internal.constant.ErrorCode;
@@ -18,7 +17,6 @@ import com.whn.waf.common.support.ParamBuilder;
 import com.whn.waf.common.utils.ObjectId;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -36,7 +34,7 @@ import java.util.Map;
 @Service
 public class ChargeService {
 
-    @Autowired
+    @Resource
     private AppContext context;
 
     @Resource
