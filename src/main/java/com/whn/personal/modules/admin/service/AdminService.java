@@ -80,7 +80,7 @@ public class AdminService {
     private Cache<String, Admin> adminsCache = CacheBuilder.newBuilder().
             maximumSize(100).expireAfterWrite(3600, TimeUnit.SECONDS).build();
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Admin getById(final String id) {
         try {
             return adminsCache.get(id, new Callable<Admin>() {
@@ -90,7 +90,7 @@ public class AdminService {
                 }
             });
         } catch (ExecutionException e) {
-            LOGGER.error("getCaseStandardLaborTime error", e);
+            LOGGER.error("get admin by id error", e);
         }
         return null;
     }
@@ -111,9 +111,9 @@ public class AdminService {
     }
 
     /**
-     * 每天0点更新过期的token
+     * 每天早上9点更新过期的token
      */
-    @Scheduled(cron = "0 0 0 * * ? ")
+    @Scheduled(cron = "0 0 9 * * ? ")
     public void refreshTokenTask() {
         refreshExpiredToken();
     }
