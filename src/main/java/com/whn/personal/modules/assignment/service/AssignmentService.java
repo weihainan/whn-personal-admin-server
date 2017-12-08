@@ -32,7 +32,7 @@ public class AssignmentService {
     @Resource
     private AppContext appContext;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Assignment add(Assignment assignment) {
         ValidatorUtil.validateAndThrow(assignment);
         assignment.setUserId(appContext.getUserId());
@@ -43,7 +43,7 @@ public class AssignmentService {
         return assignment;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Assignment completed(String id) {
         Assignment assignment = assignmentMapper.selectByPrimaryKey(id);
         assignment.setCompleted(true);
@@ -51,7 +51,7 @@ public class AssignmentService {
         return assignment;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Assignment delete(String id) {
         Assignment assignment = assignmentMapper.selectByPrimaryKey(id);
         assignmentMapper.deleteByPrimaryKey(id);
@@ -67,7 +67,7 @@ public class AssignmentService {
         return PageableItems.of(page.getResult(), page.getTotal());
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Object completeAll() {
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", appContext.getUserId());
@@ -80,7 +80,7 @@ public class AssignmentService {
         return PageableItems.of(assignmentList, assignmentList.size());
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Object deleteAllCompleted() {
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", appContext.getUserId());

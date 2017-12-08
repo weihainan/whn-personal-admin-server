@@ -31,7 +31,7 @@ public class AppleService {
         return applesMapper.selectList(appContext.getUserId());
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Apple add() {
         Apple apple = new Apple();
         apple.setWeight(getWeightOnBase(65, 200));
@@ -46,7 +46,7 @@ public class AppleService {
         return new Random().nextInt(weight) + base;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Apple eat(int id) {
         Apple apple = applesMapper.selectByPrimaryKey(id);
         if (apple == null) {

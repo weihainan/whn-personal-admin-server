@@ -40,7 +40,7 @@ public class ChargeService {
     @Resource
     private ChargeMapper chargeMapper;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Object add(Charge charge) {
         if (StringUtils.isBlank(charge.getId())) {
             charge.setUserId(appContext.getUserId());
@@ -60,7 +60,7 @@ public class ChargeService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Object delete(String id) {
         Charge charge = chargeMapper.selectByPrimaryKey(id);
         checkOwner(charge);

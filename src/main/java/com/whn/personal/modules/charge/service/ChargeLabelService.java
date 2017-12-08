@@ -24,7 +24,7 @@ public class ChargeLabelService {
     @Resource
     private ChargeLabelMapper chargeLabelMapper;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Object add(ChargeLabel label) {
         label.setCreateTime(new Date());
         label.setId(DigestUtils.md5Hex(String.format("%s", label.getName())));
@@ -37,7 +37,7 @@ public class ChargeLabelService {
         return label;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Object delete(String id) {
         ChargeLabel oldOne = chargeLabelMapper.selectByPrimaryKey(id);
         if (oldOne == null) {

@@ -42,7 +42,7 @@ public class AdminService {
     @Resource
     private AdminMapper adminMapper;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Object add(Admin admin) {
 
         ValidatorUtil.validateAndThrow(admin);
@@ -62,7 +62,7 @@ public class AdminService {
         admin.setExpireTime(new DateTime(localDate.toDate()).getMillis() - 1);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Admin login(LoginAdminVo loginAdminVo) {
         ValidatorUtil.validateAndThrow(loginAdminVo);
         Admin admin = getById(loginAdminVo.getId());
@@ -80,7 +80,7 @@ public class AdminService {
     private Cache<String, Admin> adminsCache = CacheBuilder.newBuilder().
             maximumSize(100).expireAfterWrite(3600, TimeUnit.SECONDS).build();
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, rollbackFor = Exception.class)
     public Admin getById(final String id) {
         try {
             return adminsCache.get(id, new Callable<Admin>() {
@@ -111,14 +111,14 @@ public class AdminService {
     }
 
     /**
-     * 每天早上9点更新过期的token
+     * 每天中午12点更新过期的token
      */
-    @Scheduled(cron = "0 0 9 * * ? ")
+    @Scheduled(cron = "0 0 12 * * ? ")
     public void refreshTokenTask() {
         refreshExpiredToken();
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void refreshExpiredToken() {
         LOGGER.info(" start refresh admin token");
         int count = 0;
