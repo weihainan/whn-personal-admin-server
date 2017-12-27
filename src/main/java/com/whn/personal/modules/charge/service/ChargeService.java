@@ -76,7 +76,7 @@ public class ChargeService {
 
     @Transactional(readOnly = true)
     public Object search(SearchVo condition) {
-        PageHelperUtils.paging(condition.getPage(), condition.getSize());
+        PageHelperUtils.startPage(condition.getPage(), condition.getSize());
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", appContext.getUserId());
         if (StringUtils.isNotBlank(condition.getYearAndMonth())) {

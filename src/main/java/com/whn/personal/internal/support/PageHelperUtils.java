@@ -10,7 +10,13 @@ import com.github.pagehelper.PageHelper;
  */
 public class PageHelperUtils {
 
-    public static void paging(long page, long size) {
+    /**
+     * 按页码分页
+     *
+     * @param page 页数 大于等于1 否则默认1
+     * @param size 每页个数 大于0 否则默认10
+     */
+    public static void startPage(long page, long size) {
         if (page < 1) {
             page = 1;
         }
@@ -20,18 +26,12 @@ public class PageHelperUtils {
         PageHelper.startPage((int) page, (int) size);
     }
 
-    public static void pagination(long offset, long limit) {
-        if (offset < 0) {
-            offset = 1;
-        }
-        if (limit < 0) {
-            limit = 10;
-        }
-        long page = offset / limit + 1;
-        long size = limit;
-        PageHelper.startPage((int) page, (int) size);
-    }
-
+    /**
+     * 按照偏移量分页
+     *
+     * @param offset 偏移量 大于等于0 否则默认0
+     * @param limit  每页个数 大于0 否则默认10
+     */
     public static void offsetPage(long offset, long limit) {
         if (offset < 0) {
             offset = 0;

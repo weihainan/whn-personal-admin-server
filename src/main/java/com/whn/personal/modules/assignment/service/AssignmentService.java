@@ -62,7 +62,7 @@ public class AssignmentService {
     public Object list(ListDto dto) {
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", appContext.getUserId());
-        PageHelperUtils.paging(dto.getPage(), dto.getSize());
+        PageHelperUtils.startPage(dto.getPage(), dto.getSize());
         Page<Assignment> page = assignmentMapper.select(params);
         return PageableItems.of(page.getResult(), page.getTotal());
     }

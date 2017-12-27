@@ -50,7 +50,7 @@ public class ChargeLabelService {
     @Transactional(readOnly = true)
     public Object selectAll(int page, int size, boolean all) {
         if (!all) {
-            PageHelperUtils.paging(page, size);
+            PageHelperUtils.startPage(page, size);
             Page<ChargeLabel> result = chargeLabelMapper.selectAll();
             return PageableItems.of(result.getResult(), result.getTotal());
         } else {
