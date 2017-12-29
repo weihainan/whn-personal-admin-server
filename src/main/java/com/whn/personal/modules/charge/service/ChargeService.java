@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.whn.personal.internal.constant.ErrorCode;
 import com.whn.personal.internal.support.AppContext;
-import com.whn.personal.internal.support.PageHelperUtils;
 import com.whn.personal.modules.charge.domain.Charge;
 import com.whn.personal.modules.charge.enums.ChargeType;
 import com.whn.personal.modules.charge.enums.TimePatten;
@@ -15,6 +14,7 @@ import com.whn.waf.base.exception.WafBizException;
 import com.whn.waf.common.id.ObjectId;
 import com.whn.waf.common.support.builder.ParamBuilder;
 import com.whn.waf.common.support.vo.PageableItems;
+import com.whn.waf.config.mybatis.support.PageHelperUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
@@ -76,7 +76,7 @@ public class ChargeService {
 
     @Transactional(readOnly = true)
     public Object search(SearchVo condition) {
-        PageHelperUtils.startPage(condition.getPage(), condition.getSize());
+        PageHelperUtil.startPage(condition.getPage(), condition.getSize());
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", appContext.getUserId());
         if (StringUtils.isNotBlank(condition.getYearAndMonth())) {
