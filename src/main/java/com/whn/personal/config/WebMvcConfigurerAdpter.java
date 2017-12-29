@@ -1,7 +1,7 @@
 package com.whn.personal.config;
 
 import com.whn.personal.internal.intercptor.ContextResolveInterceptor;
-import com.whn.waf.common.config.AbstractWebMvcConfigurerAdpter;
+import com.whn.waf.config.base.AbstractWebMvcConfigurerAdpter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;

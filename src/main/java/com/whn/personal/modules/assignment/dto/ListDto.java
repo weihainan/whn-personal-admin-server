@@ -1,6 +1,6 @@
 package com.whn.personal.modules.assignment.dto;
 
-import com.whn.waf.common.support.PageParams;
+import com.whn.waf.common.support.dto.PageParams;
 
 /**
  * @author weihainan

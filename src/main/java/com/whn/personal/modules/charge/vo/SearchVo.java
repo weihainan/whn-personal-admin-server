@@ -1,6 +1,6 @@
 package com.whn.personal.modules.charge.vo;
 
-import com.whn.waf.common.support.PageParams;
+import com.whn.waf.common.support.dto.PageParams;
 
 /**
  * @author weihainan.

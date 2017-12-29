@@ -1,7 +1,6 @@
 package com.whn.personal.internal.support;
 
 import com.whn.personal.modules.admin.domain.Admin;
-import com.whn.waf.common.context.Context;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @since 0.1 created on 2017/7/13.
  */
 @Component
-public class AppContext extends Context {
+public class AppContext extends com.whn.waf.base.context.Context {
 
     private static ApplicationContext applicationContext;
 
