@@ -1,7 +1,7 @@
 package com.whn.personal.internal.support;
 
 import com.whn.personal.modules.admin.domain.Admin;
-import org.springframework.context.ApplicationContext;
+import com.whn.waf.base.context.Context;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
  * @since 0.1 created on 2017/7/13.
  */
 @Component
-public class AppContext extends com.whn.waf.base.context.Context {
-
-    private static ApplicationContext applicationContext;
+public class AppContext extends Context {
 
     public AppContext() {
     }
@@ -31,9 +29,6 @@ public class AppContext extends com.whn.waf.base.context.Context {
     }
 
     public String getUserName() {
-        if (getUserInfo() == null) {
-            return null;
-        }
-        return getUserInfo().getName();
+        return getUserInfo() == null ? null : getUserInfo().getName();
     }
 }
