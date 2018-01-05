@@ -48,11 +48,11 @@ public class ChargeController {
     private RateLimiter rateLimiter = RateLimiter.create(0.1);
 
     /**
-     * 改接口做限流 允许10秒访问一次
+     * 该接口做限流 允许10秒访问一次
      */
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
     public Object statistics() {
-        if (!rateLimiter.tryAcquire(5, TimeUnit.SECONDS)) {
+        if (!rateLimiter.tryAcquire(2, TimeUnit.SECONDS)) {
             throw WafBizException.of(ErrorCode.REQUEST_LIMIT);
         }
         return chargeService.statistics();
