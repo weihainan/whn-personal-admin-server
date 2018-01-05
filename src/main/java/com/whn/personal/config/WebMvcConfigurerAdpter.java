@@ -1,6 +1,6 @@
 package com.whn.personal.config;
 
-import com.whn.personal.internal.intercptor.ContextResolveInterceptor;
+import com.whn.personal.internal.intercptor.AuthenticationInterceptor;
 import com.whn.waf.config.base.AbstractWebMvcConfigurerAdpter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -26,7 +26,7 @@ public class WebMvcConfigurerAdpter extends AbstractWebMvcConfigurerAdpter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         super.addInterceptors(registry);
-        registry.addInterceptor(new ContextResolveInterceptor());
+        registry.addInterceptor(new AuthenticationInterceptor());
     }
 
 }

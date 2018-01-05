@@ -150,6 +150,7 @@ public class ChargeService {
             map = Maps.newHashMap();
             map.put("userId", appContext.getUserId());
             map.put("timePatten", TimePatten.yearmonth.getValue());
+            map.put("year", year);
             List<String> monthAndYears = chargeMapper.selectYearMonth(map);
             for (String monthAndYear : monthAndYears) {
                 Map<String, Object> monthDates = Maps.newHashMap();
