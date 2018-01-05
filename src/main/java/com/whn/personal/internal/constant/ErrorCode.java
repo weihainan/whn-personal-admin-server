@@ -21,7 +21,9 @@ public enum ErrorCode implements IErrorCode {
     WRONG_USER_INFO(HttpStatus.UNAUTHORIZED, "WRONG_USER_INFO", "用户信息错误."),
     TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "TOKEN_EXPIRED", "用户认证过期,请重新登陆."),
 
-    LOGIN_ERROR(HttpStatus.BAD_REQUEST, "LOGIN_ERROR", "用户名或密码错误."),;
+    LOGIN_ERROR(HttpStatus.BAD_REQUEST, "LOGIN_ERROR", "用户名或密码错误."),
+
+    REQUEST_LIMIT(HttpStatus.BAD_REQUEST, "REQUEST_LIMIT", "接口限流,请稍后再试.");
 
     private static final Logger logger = LoggerFactory.getLogger(ErrorCode.class);
 

@@ -1,12 +1,16 @@
 package com.whn.personal.modules.charge.web;
 
+import com.google.common.util.concurrent.RateLimiter;
+import com.whn.personal.internal.constant.ErrorCode;
 import com.whn.personal.modules.charge.domain.Charge;
 import com.whn.personal.modules.charge.service.ChargeService;
 import com.whn.personal.modules.charge.vo.SearchVo;
+import com.whn.waf.base.exception.WafBizException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author weihainan.
@@ -40,8 +44,17 @@ public class ChargeController {
         return chargeService.getYearMonth();
     }
 
+
+    private RateLimiter rateLimiter = RateLimiter.create(0.1);
+
+    /**
+     * 改接口做限流 允许10秒访问一次
+     */
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
     public Object statistics() {
+        if (!rateLimiter.tryAcquire(5, TimeUnit.SECONDS)) {
+            throw WafBizException.of(ErrorCode.REQUEST_LIMIT);
+        }
         return chargeService.statistics();
     }
 }
