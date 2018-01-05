@@ -7,6 +7,7 @@ import com.whn.personal.modules.charge.mapper.ChargeLabelMapper;
 import com.whn.waf.base.exception.WafBizException;
 import com.whn.waf.common.support.vo.PageableItems;
 import com.whn.waf.common.support.vo.SimpleItems;
+import com.whn.waf.common.utils.CommonUtil;
 import com.whn.waf.config.mybatis.support.PagingHelper;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author weihainan.
@@ -34,6 +36,7 @@ public class ChargeLabelService {
             throw WafBizException.of(ErrorCode.DATA_CONFLICT);
         }
         chargeLabelMapper.insert(label);
+        allLabelCache = null;
         return label;
     }
 
@@ -44,17 +47,24 @@ public class ChargeLabelService {
             throw WafBizException.of(ErrorCode.DATA_NOT_EXIST);
         }
         chargeLabelMapper.deleteByPrimaryKey(id);
+        allLabelCache = null;
         return oldOne;
     }
 
+    private List<ChargeLabel> allLabelCache = null;
+
     @Transactional(readOnly = true)
     public Object selectAll(int page, int size, boolean all) {
+        if (CommonUtil.isNotEmpty(allLabelCache)) {
+            return SimpleItems.of(allLabelCache);
+        }
         if (!all) {
             PagingHelper.startPage(page, size);
             Page<ChargeLabel> result = chargeLabelMapper.selectAll();
             return PageableItems.of(result.getResult(), result.getTotal());
         } else {
             Page<ChargeLabel> result = chargeLabelMapper.selectAll();
+            allLabelCache = result.getResult();
             return SimpleItems.of(result.getResult());
         }
     }
