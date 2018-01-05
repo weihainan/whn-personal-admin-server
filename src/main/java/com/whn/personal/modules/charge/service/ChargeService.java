@@ -14,7 +14,7 @@ import com.whn.waf.base.exception.WafBizException;
 import com.whn.waf.common.id.ObjectId;
 import com.whn.waf.common.support.builder.ParamBuilder;
 import com.whn.waf.common.support.vo.PageableItems;
-import com.whn.waf.config.mybatis.support.PageHelperUtil;
+import com.whn.waf.config.mybatis.support.PagingHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
@@ -76,7 +76,7 @@ public class ChargeService {
 
     @Transactional(readOnly = true)
     public Object search(SearchVo condition) {
-        PageHelperUtil.startPage(condition.getPage(), condition.getSize());
+        PagingHelper.startPage(condition.getPage(), condition.getSize());
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", appContext.getUserId());
         if (StringUtils.isNotBlank(condition.getYearAndMonth())) {

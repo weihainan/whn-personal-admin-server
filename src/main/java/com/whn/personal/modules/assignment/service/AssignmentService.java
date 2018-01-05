@@ -9,7 +9,7 @@ import com.whn.personal.modules.assignment.mapper.AssignmentMapper;
 import com.whn.waf.common.id.ObjectId;
 import com.whn.waf.common.support.vo.PageableItems;
 import com.whn.waf.common.utils.valid.ValidatorUtil;
-import com.whn.waf.config.mybatis.support.PageHelperUtil;
+import com.whn.waf.config.mybatis.support.PagingHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,7 +62,7 @@ public class AssignmentService {
     public Object list(ListDto dto) {
         Map<String, Object> params = Maps.newHashMap();
         params.put("userId", appContext.getUserId());
-        PageHelperUtil.startPage(dto.getPage(), dto.getSize());
+        PagingHelper.startPage(dto.getPage(), dto.getSize());
         Page<Assignment> page = assignmentMapper.select(params);
         return PageableItems.of(page.getResult(), page.getTotal());
     }

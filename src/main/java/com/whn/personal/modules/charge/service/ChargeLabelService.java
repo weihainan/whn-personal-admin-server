@@ -7,7 +7,7 @@ import com.whn.personal.modules.charge.mapper.ChargeLabelMapper;
 import com.whn.waf.base.exception.WafBizException;
 import com.whn.waf.common.support.vo.PageableItems;
 import com.whn.waf.common.support.vo.SimpleItems;
-import com.whn.waf.config.mybatis.support.PageHelperUtil;
+import com.whn.waf.config.mybatis.support.PagingHelper;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +50,7 @@ public class ChargeLabelService {
     @Transactional(readOnly = true)
     public Object selectAll(int page, int size, boolean all) {
         if (!all) {
-            PageHelperUtil.startPage(page, size);
+            PagingHelper.startPage(page, size);
             Page<ChargeLabel> result = chargeLabelMapper.selectAll();
             return PageableItems.of(result.getResult(), result.getTotal());
         } else {
