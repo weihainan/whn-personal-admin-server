@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS `charge` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `charge` ADD INDEX `charge_userId_time_idx` ( `user_id`, `create_time`);
+
 
 CREATE TABLE IF NOT EXISTS `assignment` (
   `id` varchar(64) NOT NULL,
