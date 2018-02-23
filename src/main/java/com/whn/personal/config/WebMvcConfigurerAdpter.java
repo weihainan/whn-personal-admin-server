@@ -1,7 +1,7 @@
 package com.whn.personal.config;
 
 import com.whn.personal.internal.intercptor.AuthenticationInterceptor;
-import com.whn.waf.config.base.AbstractWebMvcConfigurerAdpter;
+import com.whn.waf.config.AbstractWebMvcConfigurerAdpter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;

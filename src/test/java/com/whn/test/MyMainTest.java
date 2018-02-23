@@ -1,7 +1,7 @@
 package com.whn.test;
 
 import com.google.common.collect.Lists;
-import com.whn.waf.common.utils.Encrypt;
+import com.whn.waf.foundation.util.lang.Encrypt;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Test;
 import org.springframework.util.Base64Utils;

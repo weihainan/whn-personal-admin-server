@@ -4,7 +4,7 @@ import com.whn.personal.internal.constant.ErrorCode;
 import com.whn.personal.internal.support.AppContext;
 import com.whn.personal.modules.apple.domain.Apple;
 import com.whn.personal.modules.apple.mapper.ApplesMapper;
-import com.whn.waf.base.exception.WafBizException;
+import com.whn.waf.foundation.exception.WafBizException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

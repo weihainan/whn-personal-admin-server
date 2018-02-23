@@ -5,7 +5,7 @@ import com.whn.personal.internal.constant.ErrorCode;
 import com.whn.personal.modules.charge.domain.Charge;
 import com.whn.personal.modules.charge.service.ChargeService;
 import com.whn.personal.modules.charge.vo.SearchVo;
-import com.whn.waf.base.exception.WafBizException;
+import com.whn.waf.foundation.exception.WafBizException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

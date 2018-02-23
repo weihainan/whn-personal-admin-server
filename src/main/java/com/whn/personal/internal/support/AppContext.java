@@ -1,7 +1,7 @@
 package com.whn.personal.internal.support;
 
 import com.whn.personal.modules.admin.domain.Admin;
-import com.whn.waf.base.context.Context;
+import com.whn.waf.foundation.context.Context;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,7 +14,10 @@ public class AppContext extends Context {
     public AppContext() {
     }
 
-    private final static String USER_INFO_KEY = "CURRENT_USER_INFO"; //当前用户信息
+    /**
+     * 当前用户信息
+     */
+    private final static String USER_INFO_KEY = "CURRENT_USER_INFO";
 
     public void setUserInfo(Admin userInfo) {
         getRequest().setAttribute(USER_INFO_KEY, userInfo);

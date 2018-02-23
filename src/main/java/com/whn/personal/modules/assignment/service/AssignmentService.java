@@ -6,10 +6,10 @@ import com.whn.personal.internal.support.AppContext;
 import com.whn.personal.modules.assignment.domain.Assignment;
 import com.whn.personal.modules.assignment.dto.ListDto;
 import com.whn.personal.modules.assignment.mapper.AssignmentMapper;
-import com.whn.waf.common.id.ObjectId;
-import com.whn.waf.common.support.vo.PageableItems;
-import com.whn.waf.common.utils.valid.ValidatorUtil;
 import com.whn.waf.config.mybatis.support.PagingHelper;
+import com.whn.waf.foundation.support.PageableItems;
+import com.whn.waf.foundation.util.ValidatorUtil;
+import com.whn.waf.foundation.util.id.ObjectId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

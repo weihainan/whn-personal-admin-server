@@ -10,11 +10,11 @@ import com.whn.personal.modules.charge.enums.ChargeType;
 import com.whn.personal.modules.charge.enums.TimePatten;
 import com.whn.personal.modules.charge.mapper.ChargeMapper;
 import com.whn.personal.modules.charge.vo.SearchVo;
-import com.whn.waf.base.exception.WafBizException;
-import com.whn.waf.common.id.ObjectId;
-import com.whn.waf.common.support.builder.ParamBuilder;
-import com.whn.waf.common.support.vo.PageableItems;
 import com.whn.waf.config.mybatis.support.PagingHelper;
+import com.whn.waf.foundation.exception.WafBizException;
+import com.whn.waf.foundation.support.PageableItems;
+import com.whn.waf.foundation.support.ParamsBuilder;
+import com.whn.waf.foundation.util.id.ObjectId;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
@@ -91,16 +91,16 @@ public class ChargeService {
         List<Map> result = Lists.newArrayList();
         String currentYearAndMonth = DateTime.now().toString("yyyy-MM");
 
-        Map<String, Object> map = ParamBuilder
+        Map<String, Object> map = ParamsBuilder
                 .of("userId", appContext.getUserId())
                 .withParam("timePatten", TimePatten.yearmonth.getValue())
                 .build();
         List<String> list = chargeMapper.selectYearMonth(map);
         if (!list.contains(currentYearAndMonth)) {
-            result.add(ParamBuilder.of("time", currentYearAndMonth).build());
+            result.add(ParamsBuilder.of("time", currentYearAndMonth).build());
         }
         for (String value : list) {
-            result.add(ParamBuilder.of("time", value).build());
+            result.add(ParamsBuilder.of("time", value).build());
         }
         return result;
     }

@@ -1,8 +1,8 @@
 package com.whn.personal.config;
 
 
-import com.whn.waf.config.base.AbstractWebApplicationInitialzer;
-import com.whn.waf.config.base.ServiceConfigurerAdapter;
+import com.whn.waf.config.AbstractWebApplicationInitialzer;
+import com.whn.waf.config.ServiceConfigurerAdapter;
 import com.whn.waf.config.mybatis.MyBatisConfig;
 
 import javax.servlet.ServletContext;

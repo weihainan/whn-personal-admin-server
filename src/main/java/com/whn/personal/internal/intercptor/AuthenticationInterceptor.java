@@ -4,7 +4,7 @@ import com.whn.personal.internal.constant.GuestApi;
 import com.whn.personal.internal.support.AppContext;
 import com.whn.personal.modules.admin.domain.Admin;
 import com.whn.personal.modules.admin.service.AdminService;
-import com.whn.waf.base.exception.WafBizException;
+import com.whn.waf.foundation.exception.WafBizException;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;

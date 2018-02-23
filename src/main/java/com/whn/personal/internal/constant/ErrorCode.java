@@ -1,7 +1,7 @@
 package com.whn.personal.internal.constant;
 
-import com.whn.waf.base.constant.IErrorCode;
-import com.whn.waf.base.context.WafProperties;
+import com.whn.waf.foundation.constant.IErrorCode;
+import com.whn.waf.foundation.context.WafProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ResourceBundleMessageSource;
